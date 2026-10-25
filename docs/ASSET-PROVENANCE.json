@@ -1,0 +1,70 @@
+{
+  "provenance": "Original saved Supreme-Fitness-Massage.html recovered from file_00000000891482109e489260e5b94537; six originals extracted from embedded JPEG data without image modification.",
+  "assets": [
+    {
+      "source_photo": 1,
+      "filename": "treatment-menu.jpg",
+      "width": 720,
+      "height": 1280,
+      "bytes": 169774,
+      "library_id": "libfile_a220c549710881918f9e26088adf9ef1",
+      "sha256": "d590edbd4950d17660d18818df4b8a5bb676a96d99684e3acf210d8294ec093a",
+      "verified": true
+    },
+    {
+      "source_photo": 2,
+      "filename": "massage-session.jpg",
+      "width": 1080,
+      "height": 609,
+      "bytes": 43967,
+      "library_id": "libfile_78a240c1c28c819184a0ac43681a8605",
+      "sha256": "32279b28854beddd28e3a10cf11712224a87e2fb1d5c621108530a6f8c221db3",
+      "verified": true
+    },
+    {
+      "source_photo": 3,
+      "filename": "supreme-treatment.jpg",
+      "width": 853,
+      "height": 1280,
+      "bytes": 92588,
+      "library_id": "libfile_8e179d26a8b481918b4b09cbaa7cb712",
+      "sha256": "47648aa14ab99d85f6914b189c13abc58c6e14d9f87e29c45dfd34c1e5960fbe",
+      "verified": true
+    },
+    {
+      "source_photo": 4,
+      "filename": "training-certificate.jpg",
+      "width": 960,
+      "height": 1280,
+      "bytes": 133074,
+      "library_id": "libfile_83d8f3c533d88191a644125d29237123",
+      "sha256": "525edce6f38c2afbba5d547adfc1e4c9897103642053969796a7e726c65f5d88",
+      "verified": true
+    },
+    {
+      "source_photo": 5,
+      "filename": "supreme-poster.jpg",
+      "width": 853,
+      "height": 1280,
+      "bytes": 72561,
+      "library_id": "libfile_1d2f2c7ec51c81919f89f33466a5bf40",
+      "sha256": "284d375cdb81301f89b30444f7f3749d7287904de2902585c118333d1bde9267",
+      "verified": true
+    },
+    {
+      "source_photo": 6,
+      "filename": "personal-care.jpg",
+      "width": 1080,
+      "height": 608,
+      "bytes": 41996,
+      "library_id": "libfile_96d069c03388819192f9153dc07137c6",
+      "sha256": "c43b35e5b1724bc525b3f6200f6642f8c1606af2347b0ad49baf5d2e77e8ca5e",
+      "verified": true
+    }
+  ],
+  "source_html": {
+    "filename": "Supreme-Fitness-Massage.html",
+    "bytes": 1075541,
+    "sha256": "604ff3762ab71d64bd1733e66b8e1cfbaab938ffa8a5ba6dc51a7037c858bce7"
+  }
+}

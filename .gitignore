@@ -1,0 +1,11 @@
+node_modules/
+.vercel/
+dist/
+.cache/
+test-results/
+playwright-report/
+OPEN-WEBSITE.html
+.env
+.env.*
+!.env.example
+

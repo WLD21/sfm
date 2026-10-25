@@ -1,0 +1,11 @@
+.git
+.vercel
+.openai
+.cache
+node_modules
+dist
+test-results
+playwright-report
+OPEN-WEBSITE.html
+.env
+.env.*

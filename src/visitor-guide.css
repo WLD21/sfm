@@ -1,0 +1,25 @@
+body.modal-open { overflow: hidden; }
+.visit-guide { margin: 0 0 30px; border: 1px solid var(--border); border-radius: 16px; background: var(--paper); }
+.visit-guide > summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 72px; padding: 22px 26px; list-style: none; cursor: pointer; }
+.visit-guide > summary::-webkit-details-marker { display: none; }
+.visit-guide .eyebrow { display: block; margin-bottom: 6px; }
+.visit-guide-title { display: block; font: 700 clamp(21px, 2.3vw, 27px)/1.3 var(--display); letter-spacing: -.025em; }
+.visit-guide-toggle { flex-shrink: 0; font-size: 28px; color: var(--gold); transition: transform .2s; }
+.visit-guide[open] .visit-guide-toggle { transform: rotate(45deg); }
+.visit-guide-content { padding: 0 26px 26px; }
+.visit-guide-intro { color: var(--muted); font-size: 15px; margin-bottom: 24px; }
+.visit-guide-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 26px; }
+.guide-number { color: var(--gold); font: 700 13px var(--cta); }
+.visit-guide h3 { font-size: 22px; line-height: 1.3; margin: 12px 0; }
+.visit-guide-grid p, .training-note p { color: var(--muted); font-size: 14px; line-height: 1.8; }
+.training-note { display: flex; align-items: center; justify-content: space-between; gap: 24px; border-top: 1px solid var(--border); padding-top: 20px; margin-top: 24px; }
+.training-note p { max-width: 70ch; }
+.training-note .text-link { flex-shrink: 0; }
+.privacy-dialog { width: min(680px, calc(100% - 32px)); }
+.privacy-dialog > .eyebrow { margin-right: 40px; }
+.privacy-dialog h2 { padding-right: 18px; }
+.privacy-sections { display: grid; gap: 20px; margin-top: 28px; }
+.privacy-sections h3 { margin: 0 0 8px; font-size: 21px; line-height: 1.3; }
+.privacy-sections p { color: var(--muted); font-size: 14px; line-height: 1.8; }
+@media (max-width: 800px) { .visit-guide-grid { grid-template-columns: 1fr; gap: 20px; } .visit-guide-grid article + article { border-top: 1px solid var(--border); padding-top: 20px; } .training-note { display: block; } .training-note .text-link { margin-top: 12px; } }
+@media (max-width: 650px) { .visit-guide > summary { padding: 20px 18px; } .visit-guide-content { padding: 0 18px 20px; } .privacy-dialog { padding: 34px 22px 26px; } }

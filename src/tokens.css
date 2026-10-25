@@ -1,0 +1,22 @@
+:root {
+  color-scheme: light;
+  --paper: #f2eadc;
+  --warm-white: #fffaf1;
+  --forest: #35483c;
+  --muted: #635949;
+  --gold: #795421;
+  --dark-gold: #664219;
+  --sand: #e8d7b8;
+  --sage: #e4e7db;
+  --border: #d3c3a8;
+  --button: #cda35d;
+  --button-text: #2d2417;
+  --button-hover: #dfb976;
+  --ivory: var(--paper);
+  --ink: #342d25;
+  --line: var(--border);
+  --display: 'Lora', Georgia, 'Times New Roman', serif;
+  --cta: 'Outfit', 'Manrope', Arial, Helvetica, sans-serif;
+  --serif: var(--display);
+  --sans: 'Manrope', Arial, Helvetica, sans-serif;
+}

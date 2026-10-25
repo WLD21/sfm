@@ -1,0 +1,37 @@
+SUPREME FITNESS & MASSAGE
+
+TO VIEW THE WEBSITE
+Double-click OPEN-WEBSITE.html after extracting this ZIP.
+It contains the full design, scripts, fonts and all six photos in one file.
+It does not need npm, a development server or an internet connection to display.
+Open it in a normal browser; an attachment text/code viewer is not a browser preview.
+
+LANGUAGES
+Choose English, Français or Nederlands in the header or booking dialog.
+Switching languages keeps your entered details. The language choice is remembered
+when browser storage is available.
+
+TO EDIT THE SOURCE IN VS CODE
+Open this folder, then run:
+  npm install
+  npm run dev
+Open the local address printed in the terminal. Keep the terminal running.
+
+The developer file index.html needs that dev server. It is not the standalone file.
+The src folder contains the editable CSS and JavaScript.
+The dist folder contains the production build for an HTTP web host.
+
+After editing, regenerate both versions with:
+  npm run build
+
+TO PUBLISH ON VERCEL
+See DEPLOY-TO-VERCEL.txt. The included vercel.json sets the build and output folder.
+Vercel will provide the live link after deployment succeeds in your account.
+
+Booking requests can be prepared, copied or downloaded. They are not automatically
+sent or reserved. Antwerp travel is estimated at EUR 9.99-14.99 in addition to treatment; outside
+Antwerp, a travel quote is agreed with the client. Reviews can be prepared with
+a private email or phone contact. Review sending needs a business recipient;
+reviews are not automatically sent or publicly posted.
+Subscription checkout is disabled until real plans and payments
+are configured. See docs/CONFIGURATION.md. No live Sites URL has been published.

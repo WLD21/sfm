@@ -1,0 +1,34 @@
+SUPREME FITNESS & MASSAGE — VERCEL DEPLOYMENT
+
+Requires Node.js 22.12 or later and your Vercel account.
+
+1. Extract this ZIP and open the Supreme-Fitness-Massage folder in a terminal.
+2. Sign into your own account using the official CLI:
+
+   npx --yes vercel@64.5.0 login
+
+3. Deploy:
+
+   npx --yes vercel@64.5.0 --prod
+
+Choose your Vercel account/team. If this is your first deployment, create a
+project called supreme-fitness-massage (or an available name you choose).
+Use the current directory (./) as the project root. The included vercel.json
+selects Vite, installs with npm ci, builds with npm run build and publishes dist.
+
+Vercel prints the live HTTPS URL after deployment succeeds. That URL is not
+created by downloading this package. This cloud task could not deploy because
+Vercel's API was blocked by the environment network proxy and no Vercel account
+was connected. No Vercel project association or deployment is included here.
+
+If you already have a Vercel project for this website, choose that project when
+the CLI asks instead of creating another one.
+
+Only dist is published. The standalone OPEN-WEBSITE.html is still included for
+direct local viewing but excluded from the source upload. The six original
+images, fonts, GSAP and ScrollTrigger are hosted with the site.
+
+The current site does not submit appointment requests, reserve calendar times,
+charge payments or activate subscriptions. Complete docs/CONFIGURATION.md
+before enabling those services. Search-engine indexing remains disabled while
+the business configuration is unfinished.
