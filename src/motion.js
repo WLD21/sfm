@@ -18,6 +18,8 @@ export function setupMotion() {
   const intro = document.querySelector('#intro-dialog');
   const replay = document.querySelector('#replay-intro');
   let activeView = 'home';
+  let manuallyPaused = false;
+  const motionDisabled = () => preference.matches || manuallyPaused;
   let viewGeneration = 0;
   let viewContext;
   let removeFocusListener;
@@ -39,12 +41,12 @@ export function setupMotion() {
   async function enterView(name) {
     activeView = name;
     clearView();
-    if (preference.matches || intro.open) return;
+    if (motionDisabled() || intro.open) return;
     const generation = viewGeneration;
     const view = document.getElementById(name);
     try {
       const { gsap, ScrollTrigger } = await loadScrollEngine();
-      if (generation !== viewGeneration || preference.matches || intro.open || view.hidden) return;
+      if (generation !== viewGeneration || motionDisabled() || intro.open || view.hidden) return;
       const reveals = new Map();
       viewContext = gsap.context(() => {
         if (name === 'home') {
@@ -116,7 +118,7 @@ export function setupMotion() {
   }
 
   async function playIntro() {
-    if (preference.matches || intro.open) return;
+    if (motionDisabled() || intro.open) return;
     const generation = ++introGeneration;
     clearView();
     intro.showModal();
@@ -126,7 +128,7 @@ export function setupMotion() {
     deadline = setTimeout(finishIntro, 2500);
     try {
       const gsap = await loadGSAP();
-      if (generation !== introGeneration || !intro.open || preference.matches) return;
+      if (generation !== introGeneration || !intro.open || motionDisabled()) return;
       introContext = gsap.context(() => {
         const petals = intro.querySelectorAll('.intro-lotus path');
         petals.forEach((path) => {
@@ -152,12 +154,16 @@ export function setupMotion() {
   document.querySelector('#skip-intro').addEventListener('click', finishIntro);
   replay?.addEventListener('click', playIntro);
   function applyPreference() {
-    if (replay) replay.hidden = preference.matches;
-    if (preference.matches && intro.open) finishIntro();
+    if (replay) replay.hidden = motionDisabled();
+    if (motionDisabled() && intro.open) finishIntro();
     else enterView(activeView);
   }
   preference.addEventListener('change', applyPreference);
-  if (replay) replay.hidden = preference.matches;
+  document.addEventListener('motionpausechange', event => {
+    manuallyPaused = Boolean(event.detail.paused);
+    applyPreference();
+  });
+  if (replay) replay.hidden = motionDisabled();
   let seen = false;
   try { seen = sessionStorage.getItem('sfm-intro-seen') === '1'; } catch { /* No storage required. */ }
   if (!seen) playIntro();

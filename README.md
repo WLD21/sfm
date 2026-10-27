@@ -92,13 +92,13 @@ The default build has no review recipient configured. A notice above the form ex
 
 ## Privacy and remaining launch information
 
-The footer Privacy dialog describes what this build actually does: appointment/review details remain in page memory until their respective close, leave, clear or reload action; copies and downloads remain on the visitor's device; email handoffs use the visitor's own mail app. Only the selected language and session intro preference use browser storage. The app has no analytics or advertising trackers, and external websites/providers have their own privacy practices. This factual explanation is not a substitute for the business identity, contact details and policies needed when a real submission or review service is connected.
+The footer Privacy dialog describes what this build actually does: appointment/review details remain in page memory until their respective close, leave, clear or reload action; copies and downloads remain on the visitor's device; email handoffs use the visitor's own mail app. Only the selected language, session intro preference and gym/spa selection use browser storage. The app has no analytics or advertising trackers, and external websites/providers have their own privacy practices. This factual explanation is not a substitute for the business identity, contact details and policies needed when a real submission or review service is connected.
 
 The largest remaining improvements depend on owner information: a verified business contact and working booking delivery/calendar, an approved therapist introduction, exact travel/access and cancellation rules, confirmed payment methods and any subscription terms. See `docs/CONFIGURATION.md` for integration requirements and `docs/BELGIAN-MARKET-REVIEW.md` for the improvement review. Current competitor research was blocked by the cloud network; that document makes no claims about observed competitor features or a Belgian market ranking.
 
 ## Structure
 
-- `index.html` — Home, Treatments, Showcase, Your visit and Reviews views.
+- `index.html` — Home, Training, Treatments, Showcase, Your visit and Reviews views.
 - `src/i18n.js` / `src/translations.js` — language switching and English/French/Dutch copy.
 - `src/main.js` — view navigation, filters, gallery and subscription UI.
 - `src/motion.js` / `src/motion.css` — GSAP welcome, view entrances and ScrollTrigger lifecycle.

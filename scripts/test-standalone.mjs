@@ -167,7 +167,7 @@ try {
   await introPage.setContent(html);
   await expect(introPage.locator('#intro-dialog')).toBeVisible();
   await expect(introPage.locator('#intro-dialog')).not.toBeVisible({ timeout: 3000 });
-  await expect(introPage.locator('#home-title')).toBeVisible();
+  await expect(introPage.locator('#gym-home-title')).toBeVisible();
 
   // The direct-open download must contain ScrollTrigger as well as the intro.
   await introPage.locator('#primary-nav [data-view="showcase"]').click();
@@ -201,12 +201,12 @@ try {
   const noScript = await browser.newContext({ offline: true, javaScriptEnabled: false });
   const noScriptPage = await noScript.newPage();
   await noScriptPage.setContent(html);
-  await expect(noScriptPage.locator('body')).toHaveCSS('color', 'rgb(52, 45, 37)');
-  await expect(noScriptPage.locator('#home-title')).toBeVisible();
+  await expect(noScriptPage.locator('body')).toHaveCSS('color', 'rgb(36, 58, 44)');
+  await expect(noScriptPage.locator('#gym-home-title')).toBeVisible();
   await expect(noScriptPage.locator('.hero-photo img')).toHaveJSProperty('naturalWidth', 853);
   await noScript.close();
   await context.close();
-  console.log('PASS: offline standalone styles, fonts, six photos, five views, gallery, EUR prices, travel estimates, private review download, request download and subscription safeguards.');
+  console.log('PASS: offline standalone styles, fonts, six photos, six views, gallery, EUR prices, travel estimates, private review download, request download and subscription safeguards.');
   console.log('PASS: French/Dutch switching and travel pricing offline; embedded GSAP intro, replay, scroll reveals, photo parallax and live reduced-motion preference.');
   console.log('PASS: offline treatment finder carries duration/travel into booking; preparation guide, original training record and privacy dialog work.');
   console.log('PASS: design remains visible with JavaScript disabled. No external requests or page errors.');

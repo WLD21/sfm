@@ -10,7 +10,7 @@ import './experience.css';
 function readExperience() {
   try { return sessionStorage.getItem('sfm-experience') === 'spa' ? 'spa' : 'gym'; } catch { return 'gym'; }
 }
-function App({ openBooking }) {
+function App() {
   const [mode, setMode] = useState(readExperience);
   const modeRef = useRef(mode);
   const [language, setLanguage] = useState(getLanguage);
@@ -37,6 +37,7 @@ function App({ openBooking }) {
     document.body.dataset.experience = next;
     try { sessionStorage.setItem('sfm-experience', next); } catch { /* Preference is optional. */ }
     flushSync(() => setMode(next));
+    if (location.hash && location.hash !== '#home') location.hash = '#home';
     document.dispatchEvent(new CustomEvent('experiencechange', { detail: { mode: next } }));
   }
   async function changeMode(next) {
@@ -96,6 +97,7 @@ function App({ openBooking }) {
   }, [mode, c, language]);
 
   useEffect(() => { document.body.dataset.motion = animate ? 'playing' : 'paused'; }, [animate]);
+  useEffect(() => { document.dispatchEvent(new CustomEvent('motionpausechange', { detail: { paused } })); }, [paused]);
 
   useEffect(() => {
     const media = matchMedia('(prefers-reduced-motion: reduce)');
@@ -180,8 +182,12 @@ function App({ openBooking }) {
   </>;
 }
 
-export function setupExperience(options) {
+export function setupExperience() {
+  // Portals append into their targets; remove the no-JavaScript fallback once,
+  // only when the React module has successfully loaded and can take ownership.
+  document.getElementById('gym-home').replaceChildren();
+  document.getElementById('training-content').replaceChildren();
   const root = createRoot(document.getElementById('experience-system'));
-  root.render(<App {...options} />);
+  flushSync(() => root.render(<App />));
   return () => root.unmount();
 }

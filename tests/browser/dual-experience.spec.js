@@ -13,6 +13,7 @@ test('training is the default and both worlds remain accessible at phone and des
     await page.setViewportSize({ width, height: 900 });
     await page.goto('/?lang=en');
     await page.locator('[data-experience-choice="gym"]').click();
+    await expect(page.locator('#gym-home-title')).toHaveCount(1);
     await expect(page.locator('#gym-home-title')).toBeVisible();
     await expect(page.locator('#gym-home-title')).toContainText('Build strength.');
     await expect(page.locator('.gym-scene')).toBeVisible();
@@ -28,6 +29,10 @@ test('training is the default and both worlds remain accessible at phone and des
     await expect(page.locator('#training-title')).toBeFocused();
     await expect(page.locator('.training-program')).toHaveCount(3);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
+    await page.locator('[data-experience-choice="spa"]').click();
+    await expect(page).toHaveURL(/#home$/);
+    await expect(page.locator('#home-title')).toBeVisible();
+    await page.locator('[data-experience-choice="gym"]').click();
     await page.locator('[data-view="home"]').click();
     await expect(page.locator('#gym-home-title')).toBeFocused();
   }
@@ -107,7 +112,7 @@ test('training enquiry validates, exports safely and clears personal data on clo
   await expect(page.locator('#training-name')).toHaveValue('');
 });
 
-test('French and Dutch translate training, theme controls and enquiries without losing entered text', async ({ page }) => {
+test('French and Dutch translate training, theme controls and enquiries while closed forms clear entered text', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto('/?lang=fr');
   await expect(page.locator('#gym-home-title')).toContainText('Gagnez en force.');

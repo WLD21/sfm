@@ -75,9 +75,9 @@ export const visitorMessages = {
     "fr": "Des préférences de navigation simples",
     "nl": "Eenvoudige browservoorkeuren"
   },
-  "Your language choice is remembered on this device when browser storage is available. The intro preference lasts for the session. This site does not use analytics or advertising trackers.": {
-    "fr": "Votre langue est mémorisée sur cet appareil lorsque le stockage du navigateur est disponible. La préférence d’introduction dure le temps de la session. Ce site n’utilise pas de traceurs publicitaires ou d’analyse.",
-    "nl": "Je taalkeuze wordt op dit apparaat onthouden als browseropslag beschikbaar is. De introvoorkeur geldt voor de sessie. Deze site gebruikt geen analyse- of advertentietrackers."
+  "Your language choice is remembered on this device when browser storage is available. The intro preference and gym or spa selection last for the session. This site does not use analytics or advertising trackers.": {
+    "fr": "Votre langue est mémorisée sur cet appareil lorsque le stockage du navigateur est disponible. La préférence d’introduction et le choix entre fitness et spa durent le temps de la session. Ce site n’utilise pas de traceurs publicitaires ou d’analyse.",
+    "nl": "Je taalkeuze wordt op dit apparaat onthouden als browseropslag beschikbaar is. De introvoorkeur en je keuze voor fitness of spa gelden voor de sessie. Deze site gebruikt geen analyse- of advertentietrackers."
   },
   "Links to other websites": {
     "fr": "Liens vers d’autres sites",

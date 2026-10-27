@@ -222,4 +222,4 @@ const syncDialogScroll = () => document.body.classList.toggle('modal-open', Bool
 new MutationObserver(syncDialogScroll).observe(document.body, { subtree: true, attributes: true, attributeFilter: ['open'] });
 syncDialogScroll();
 
-setupExperience({ openBooking });
+setupExperience();
