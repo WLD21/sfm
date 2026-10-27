@@ -1385,3 +1385,9 @@ export const messages = {
 };
 
 Object.assign(messages, visitorMessages, treatmentFinderMessages);
+
+Object.assign(messages, {
+  'Training': { fr: 'Coaching', nl: 'Training' },
+  'Personal training, gym coaching, massage and recovery in Antwerp and surrounding areas.': { fr: 'Coaching personnel, fitness, massage et récupération à Anvers et dans ses environs.', nl: 'Personal training, fitnesscoaching, massage en herstel in Antwerpen en omgeving.' },
+  'Supreme Fitness & Massage — Train. Recover. Feel supreme.': { fr: 'Supreme Fitness & Massage — Bouger. Récupérer. Se sentir Supreme.', nl: 'Supreme Fitness & Massage — Train. Herstel. Voel je Supreme.' }
+});

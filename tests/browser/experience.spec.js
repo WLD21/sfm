@@ -1,5 +1,11 @@
 import { test, expect } from '@playwright/test';
 
+// Retain the existing massage regression suite in its original spa context.
+// dual-experience.spec.js separately verifies the new default training journey.
+test.beforeEach(async ({ page }) => {
+  await page.addInitScript(() => sessionStorage.setItem('sfm-experience', 'spa'));
+});
+
 test.beforeEach(async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
 });
@@ -103,11 +109,11 @@ test('Belgian browser language initializes the site while explicit and saved cho
     const page = await context.newPage();
     await page.goto('/');
     await expect(page.locator('html')).toHaveAttribute('lang', 'nl');
-    await expect(page.locator('#home-title')).toContainText('Haal even adem.');
+    await expect(page.locator('#gym-home-title')).toContainText('Bouw kracht op.');
 
     await page.goto('/?lang=en');
     await expect(page.locator('html')).toHaveAttribute('lang', 'en');
-    await expect(page.locator('#home-title')).toContainText('Take a breath.');
+    await expect(page.locator('#gym-home-title')).toContainText('Build strength.');
 
     await page.locator('#site-language').selectOption('fr');
     await page.goto('/#visit');

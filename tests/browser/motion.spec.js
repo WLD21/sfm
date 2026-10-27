@@ -1,5 +1,11 @@
 import { test, expect } from '@playwright/test';
 
+// Retain the existing massage regression suite in its original spa context.
+// dual-experience.spec.js separately verifies the new default training journey.
+test.beforeEach(async ({ page }) => {
+  await page.addInitScript(() => sessionStorage.setItem('sfm-experience', 'spa'));
+});
+
 async function openAnimatedShowcase(page) {
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await page.setViewportSize({ width: 1100, height: 720 });

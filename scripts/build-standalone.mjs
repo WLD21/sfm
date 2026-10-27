@@ -17,6 +17,7 @@ const result = await build({
   platform: 'browser',
   target: 'es2020',
   minify: true,
+  define: { 'process.env.NODE_ENV': '"production"' },
   charset: 'utf8',
   legalComments: 'eof',
   loader: { '.woff2': 'dataurl', '.woff': 'dataurl' },

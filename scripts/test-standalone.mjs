@@ -24,12 +24,16 @@ try {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.setContent(html);
   await page.evaluate(() => document.fonts.ready);
+  await expect(page.locator('body')).toHaveAttribute('data-experience', 'gym');
+  await expect(page.locator('#gym-home-title')).toBeVisible();
+  await page.locator('[data-experience-choice="spa"]').click();
+  await expect(page.locator('body')).toHaveAttribute('data-experience', 'spa');
   await expect(page.locator('#home-title')).toHaveCSS('font-family', /Lora/);
   await expect(page.locator('#home-title')).toHaveCSS('font-weight', '700');
   await expect(page.locator('body')).toHaveCSS('color', 'rgb(52, 45, 37)');
   await expect(page.locator('#home-title em')).toHaveCSS('color', 'rgb(121, 84, 33)');
   expect(await page.evaluate(() => document.fonts.check('700 48px "Lora"'))).toBe(true);
-  await expect(page.locator('.hero-actions .button')).toHaveCSS('font-family', /Outfit/);
+  await expect(page.locator('[data-spa-content] .hero-actions .button')).toHaveCSS('font-family', /Outfit/);
   expect(await page.evaluate(() => document.fonts.check('600 15px "Outfit"'))).toBe(true);
   await expect(page.locator('script[src], link[rel="stylesheet"]')).toHaveCount(0);
   await expect(page.locator('script[type="module"]')).toHaveCount(0);

@@ -55,9 +55,9 @@ export function setLanguage(next) {
     else bindings.delete(binding);
   }
   document.querySelectorAll('[data-language-select]').forEach(select => { select.value = language; });
-  document.title = t('Supreme Fitness & Massage — A little more you.');
+  document.title = t('Supreme Fitness & Massage — Train. Recover. Feel supreme.');
   const description = document.querySelector('meta[name="description"]');
-  if (description) description.content = t('Massage for relaxation, fitness recovery and time together, in Antwerp and surrounding areas.');
+  if (description) description.content = t('Personal training, gym coaching, massage and recovery in Antwerp and surrounding areas.');
   try { localStorage.setItem('sfm-language', language); } catch { /* Works without storage, including local files. */ }
   try {
     const url = new URL(location.href);

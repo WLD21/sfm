@@ -1,0 +1,70 @@
+name: Verify gym and spa experience
+on:
+  push:
+    branches: [codex/gym-spa-experience-2026-10-27]
+permissions:
+  contents: write
+concurrency:
+  group: gym-spa-verification
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - name: Install and resolve the added React dependencies
+        run: npm install --no-audit --no-fund
+      - name: Unit checks
+        run: npm test
+      - name: Install Chromium for the browser checks
+        run: npx playwright install --with-deps chromium
+      - name: Browser regression and new experience checks
+        run: npm run test:browser -- --workers=2
+      - name: Build website and self-contained HTML
+        run: npm run build
+      - name: Verify the exact standalone file offline
+        run: npm run test:standalone
+      - name: Save verified generated files to this feature branch
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node scripts/save-verified-build.mjs
+      - name: Package complete source
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from zipfile import ZipFile, ZIP_DEFLATED
+          root = Path('.')
+          excluded = {'.git', 'node_modules', '.cache', 'test-results', 'playwright-report', 'release'}
+          out = root / 'release'
+          out.mkdir(exist_ok=True)
+          with ZipFile(out / 'Supreme-Fitness-Massage-Source.zip', 'w', ZIP_DEFLATED) as z:
+              for path in root.rglob('*'):
+                  if path.is_file() and not any(part in excluded for part in path.parts):
+                      z.write(path, Path('Supreme-Fitness-Massage') / path)
+          with ZipFile(out / 'Supreme-Fitness-Massage-Source.zip') as z:
+              assert z.testzip() is None
+              assert 'Supreme-Fitness-Massage/src/experience.jsx' in z.namelist()
+              assert 'Supreme-Fitness-Massage/OPEN-WEBSITE.html' in z.namelist()
+              assert len(z.namelist()) > 25
+              print('Verified source ZIP entries:', len(z.namelist()))
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: success()
+        with:
+          name: Supreme-Fitness-Massage-gym-spa
+          path: |
+            release/Supreme-Fitness-Massage-Source.zip
+            OPEN-WEBSITE.html
+          retention-days: 14
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: failure()
+        with:
+          name: gym-spa-test-results
+          path: test-results
+          retention-days: 7
