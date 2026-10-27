@@ -22,13 +22,13 @@ if (ref.object.sha !== expected) {
   console.log('A newer source change exists; generated output will remain in the workflow artifact.');
   process.exit(0);
 }
-const output = execFileSync('git', ['-c', 'status.renames=false', 'status', '--porcelain=v1', '-z', '--untracked-files=all', '--', 'dist', 'OPEN-WEBSITE.html', 'package-lock.json'], { encoding: 'utf8' });
+const output = execFileSync('git', ['-c', 'status.renames=false', 'status', '--porcelain=v1', '-z', '--untracked-files=all', '--', 'dist', 'OPEN-WEBSITE.html', 'package-lock.json', 'docs/previews'], { encoding: 'utf8' });
 const entries = output.split('\0').filter(Boolean);
 if (!entries.length) { console.log('Generated output is already current.'); process.exit(0); }
 const tree = [];
 for (const entry of entries) {
   const path = entry.slice(3);
-  if (!(path.startsWith('dist/') || path === 'OPEN-WEBSITE.html' || path === 'package-lock.json') || path.includes('..')) throw new Error('Unexpected output path.');
+  if (!(path.startsWith('dist/') || /^docs\/previews\/(gym|spa)-(mobile|desktop)\.png$/.test(path) || path === 'OPEN-WEBSITE.html' || path === 'package-lock.json') || path.includes('..')) throw new Error('Unexpected output path.');
   if (entry.slice(0, 2).includes('D')) tree.push({ path, mode: '100644', type: 'blob', sha: null });
   else {
     const blob = await api('/git/blobs', 'POST', { content: (await readFile(path)).toString('base64'), encoding: 'base64' });

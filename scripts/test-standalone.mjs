@@ -26,6 +26,11 @@ try {
   await page.evaluate(() => document.fonts.ready);
   await expect(page.locator('body')).toHaveAttribute('data-experience', 'gym');
   await expect(page.locator('#gym-home-title')).toBeVisible();
+  await mkdir(path.join(root, 'docs/previews'), { recursive: true });
+  await page.screenshot({ path: path.join(root, 'docs/previews/gym-mobile.png'), fullPage: true });
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.screenshot({ path: path.join(root, 'docs/previews/gym-desktop.png'), fullPage: true });
+  await page.setViewportSize({ width: 390, height: 844 });
   await page.locator('[data-experience-choice="spa"]').click();
   await expect(page.locator('body')).toHaveAttribute('data-experience', 'spa');
   await expect(page.locator('#home-title')).toHaveCSS('font-family', /Lora/);
@@ -147,10 +152,10 @@ try {
   await expect(page.locator('[data-privacy]')).toBeFocused();
   await page.locator('#primary-nav [data-view="home"]').click();
   await page.evaluate(() => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve))));
-  await mkdir(path.join(root, '.cache/standalone'), { recursive: true });
-  await page.screenshot({ path: path.join(root, '.cache/standalone/offline-mobile.png'), fullPage: true });
+  await mkdir(path.join(root, 'docs/previews'), { recursive: true });
+  await page.screenshot({ path: path.join(root, 'docs/previews/spa-mobile.png'), fullPage: true });
   await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.screenshot({ path: path.join(root, '.cache/standalone/offline-desktop.png'), fullPage: true });
+  await page.screenshot({ path: path.join(root, 'docs/previews/spa-desktop.png'), fullPage: true });
   expect(errors).toEqual([]);
   expect(networkRequests).toEqual([]);
 

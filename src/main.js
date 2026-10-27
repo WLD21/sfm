@@ -54,7 +54,12 @@ document.querySelector('.skip-link').addEventListener('click', event => {
   document.querySelector('#main').focus();
 });
 document.querySelectorAll('[data-view]').forEach((link) => {
-  link.addEventListener('click', () => { if (location.hash === link.hash) navigate({ focus: true }); });
+  link.addEventListener('click', event => {
+    if (location.hash === link.hash) {
+      event.preventDefault();
+      navigate({ focus: true });
+    }
+  });
 });
 navigate();
 

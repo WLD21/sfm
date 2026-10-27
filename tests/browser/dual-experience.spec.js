@@ -56,7 +56,8 @@ test('dumbbells move, pausing stops motion and reduced-motion switching stays im
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await page.goto('/?lang=en');
   const weight = page.locator('.weight-primary');
-  await weight.scrollIntoViewIfNeeded();
+  // Scroll the stationary container; the dumbbell itself is continuously moving.
+  await page.locator('.gym-art').scrollIntoViewIfNeeded();
   await expect.poll(() => weight.evaluate(node => node.getAttribute('transform'))).not.toBeNull();
   const before = await weight.getAttribute('transform');
   await expect.poll(() => weight.getAttribute('transform')).not.toBe(before);
