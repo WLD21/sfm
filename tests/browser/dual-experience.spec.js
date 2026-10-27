@@ -63,7 +63,22 @@ test('dumbbells move, pausing stops motion and reduced-motion switching stays im
   await expect.poll(() => weight.getAttribute('transform')).not.toBe(before);
   await page.getByRole('button', { name: 'Pause motion', exact: true }).click();
   await expect(page.locator('body')).toHaveAttribute('data-motion', 'paused');
-  await expect.poll(() => weight.getAttribute('transform')).toBeNull();
+  await expect.poll(() => weight.evaluate(node => {
+    const transform = getComputedStyle(node).transform;
+    return transform === 'none' || new DOMMatrixReadOnly(transform).isIdentity;
+  })).toBe(true);
+  // GSAP can restore an identity matrix instead of removing the SVG attribute.
+  // Verify the rendered state stays still over several animation frames.
+  expect(await weight.evaluate(node => new Promise(resolve => {
+    const resting = node.getAttribute('transform');
+    let frames = 0;
+    const check = () => {
+      if (node.getAttribute('transform') !== resting) return resolve(false);
+      if (++frames === 12) return resolve(true);
+      requestAnimationFrame(check);
+    };
+    requestAnimationFrame(check);
+  }))).toBe(true);
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.locator('[data-experience-choice="spa"]').click();
   await expect(page.locator('.site-main')).toHaveCSS('opacity', '1');
