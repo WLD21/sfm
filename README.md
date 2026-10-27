@@ -1,5 +1,18 @@
 # Supreme Fitness & Massage
 
+## Gym and spa experience
+
+The homepage now leads with **personal training and gym coaching**. The persistent Training & gym / Spa & recovery switch fades the header, main content and footer together, changing the whole site's palette. The gym uses an animated dumbbell illustration; the spa keeps the original photography and adds swaying palms, rising steam and a warm sauna illustration. The illustration is decorative and does not assert that Supreme owns a sauna facility.
+
+React components are added to the existing Vite application, preserving its massage menu, original photos, reviews, translations and request-only booking behavior. GSAP handles theme transitions and scene motion. Animations stop off-screen, when the browser tab is hidden or the pause control is enabled, and respect reduced-motion preferences. Failed animation imports restore the visible page automatically.
+
+The new Training page describes three coaching goals without inventing prices or credentials. Training enquiries validate contact fields, show an explicit unsent review, and can be copied or downloaded before contacting Supreme. Closing the enquiry clears entered details. No booking, payment, subscription or delivery backend is simulated.
+
+English, French and Dutch are included for all new interface text. The selected experience is remembered only for the current browser session. The motion pause preference stays in page memory.
+
+Use `npm install` once after adding React, then the existing development commands. The verification workflow resolves the dependency lock, runs the existing massage regressions in spa mode plus the new gym tests, regenerates the build and standalone HTML, verifies the standalone offline, and saves generated output to the same feature branch only when its source head has not changed. A passing workflow also creates a tested source ZIP.
+
+
 A Vite / JavaScript website with a warm beige, cream and gold design, restrained green accents, geometric contour backgrounds and readable typography. Includes the six original photographs, the twelve original EUR service prices, locally bundled bold Lora titles, Outfit action labels and Manrope body fonts, compact mobile navigation, a skippable GSAP intro, an editorial gallery animated with ScrollTrigger, a treatment finder, a four-step appointment-request flow with mobile visits and travel estimates, visit preparation guidance, and a five-star review form with private email or phone contact.
 
 The approved standalone HTML was recovered directly from its recorded file identity. The broken Windows workspace and earlier unverified ZIP were not used. Image bytes and dimensions were checked against the original embedded JPEGs; see `docs/ASSET-PROVENANCE.json`.
@@ -79,13 +92,13 @@ The default build has no review recipient configured. A notice above the form ex
 
 ## Privacy and remaining launch information
 
-The footer Privacy dialog describes what this build actually does: appointment/review details remain in page memory until their respective close, leave, clear or reload action; copies and downloads remain on the visitor's device; email handoffs use the visitor's own mail app. Only the selected language and session intro preference use browser storage. The app has no analytics or advertising trackers, and external websites/providers have their own privacy practices. This factual explanation is not a substitute for the business identity, contact details and policies needed when a real submission or review service is connected.
+The footer Privacy dialog describes what this build actually does: appointment/review details remain in page memory until their respective close, leave, clear or reload action; copies and downloads remain on the visitor's device; email handoffs use the visitor's own mail app. Only the selected language, session intro preference and gym/spa selection use browser storage. The app has no analytics or advertising trackers, and external websites/providers have their own privacy practices. This factual explanation is not a substitute for the business identity, contact details and policies needed when a real submission or review service is connected.
 
 The largest remaining improvements depend on owner information: a verified business contact and working booking delivery/calendar, an approved therapist introduction, exact travel/access and cancellation rules, confirmed payment methods and any subscription terms. See `docs/CONFIGURATION.md` for integration requirements and `docs/BELGIAN-MARKET-REVIEW.md` for the improvement review. Current competitor research was blocked by the cloud network; that document makes no claims about observed competitor features or a Belgian market ranking.
 
 ## Structure
 
-- `index.html` — Home, Treatments, Showcase, Your visit and Reviews views.
+- `index.html` — Home, Training, Treatments, Showcase, Your visit and Reviews views.
 - `src/i18n.js` / `src/translations.js` — language switching and English/French/Dutch copy.
 - `src/main.js` — view navigation, filters, gallery and subscription UI.
 - `src/motion.js` / `src/motion.css` — GSAP welcome, view entrances and ScrollTrigger lifecycle.

@@ -6,19 +6,21 @@
     <meta name="theme-color" content="#f2eadc" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="robots" content="noindex, nofollow" />
-    <meta name="description" content="A little less tension. A little more you. Explore Supreme Fitness & Massage treatments, from relaxation and fitness recovery to time together, in Antwerp and surrounding areas." />
-    <title>Supreme Fitness &amp; Massage — A little more you.</title>
+    <meta name="description" content="Personal training, gym coaching, massage and recovery in Antwerp and surrounding areas. Train with purpose. Make time to recover." />
+    <title>Supreme Fitness &amp; Massage — Train. Recover. Feel supreme.</title>
   </head>
-  <body>
+  <body data-experience="gym">
     <svg class="svg-definitions" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><defs><symbol id="lotus" viewBox="0 0 80 55"><path d="M40 47C27 35 28 19 40 5c12 14 13 30 0 42ZM40 47C22 46 11 33 11 15c17 3 28 14 29 32ZM40 47C58 46 69 33 69 15 52 18 41 29 40 47Z"/><path d="M40 47C22 53 7 45 2 31c15-2 27 3 38 16ZM40 47c18 6 33-2 38-16-15-2-27 3-38 16Z"/></symbol><symbol id="arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol><symbol id="sparkle" viewBox="0 0 24 24"><path d="m12 3 2.5 6.5L21 12l-6.5 2.5L12 21l-2.5-6.5L3 12l6.5-2.5L12 3Z"/></symbol><symbol id="pin" viewBox="0 0 24 24"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2.5"/></symbol><symbol id="clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol></defs></svg>
     <a class="skip-link" href="#main">Skip to content</a>
     <header class="site-header"><div class="language-bar"><label for="site-language" translate="no">Language · Langue · Taal</label><select id="site-language" data-language-select aria-label="Language" translate="no"><option value="en" lang="en">English</option><option value="fr" lang="fr">Français</option><option value="nl" lang="nl">Nederlands</option></select></div><div class="header-inner">
       <a class="brand" href="#home" aria-label="Supreme Fitness and Massage, home"><svg class="brand-lotus" aria-hidden="true"><use href="#lotus" /></svg><span class="brand-type">Supreme<span class="brand-subtitle">Fitness &amp; Massage</span></span></a>
-      <nav class="primary-nav" id="primary-nav" aria-label="Main navigation"><a href="#home" data-view="home" aria-current="page">Home</a><a href="#treatments" data-view="treatments">Treatments</a><a href="#showcase" data-view="showcase">Showcase</a><a href="#visit" data-view="visit">Your visit</a><a href="#reviews" data-view="reviews">Reviews</a></nav>
-      <button class="button secondary header-book" type="button" data-book>Request a visit <svg class="icon" aria-hidden="true"><use href="#arrow" /></svg></button>
-    </div></header>
+      <nav class="primary-nav" id="primary-nav" aria-label="Main navigation"><a href="#home" data-view="home" aria-current="page">Home</a><a href="#training" data-view="training">Training</a><a href="#treatments" data-view="treatments">Treatments</a><a href="#showcase" data-view="showcase">Showcase</a><a href="#visit" data-view="visit">Your visit</a><a href="#reviews" data-view="reviews">Reviews</a></nav>
+      <button class="button secondary header-book" type="button" data-book data-adaptive-book>Request a visit <svg class="icon" aria-hidden="true"><use href="#arrow" /></svg></button>
+    </div><div id="experience-switcher" class="experience-switcher"></div></header>
     <main id="main" class="site-main" tabindex="-1">
       <section id="home" class="view home-view" aria-labelledby="home-title">
+        <div id="gym-home" data-gym-content><div class="gym-hero"><div class="gym-hero-copy"><p class="eyebrow">PERSONAL TRAINING · ANTWERP &amp; SURROUNDING AREAS</p><h1 id="gym-home-title" tabindex="-1">Build strength.<br /><em>Feel supreme.</em></h1><p class="gym-description">Personal training, purposeful gym sessions and recovery that fits your life.</p><a class="button" href="https://supremefitnessmassage.com/home">Discuss your training goals</a></div></div></div>
+        <div data-spa-content hidden>
         <div class="hero"><div class="hero-copy">
           <p class="eyebrow"><span class="eyebrow-line" aria-hidden="true"></span>Antwerp &amp; surrounding areas</p>
           <h1 id="home-title" tabindex="-1">Take a breath.<br /><em>Feel supreme.</em></h1>
@@ -30,9 +32,12 @@
           <figure class="hero-photo media-shell"><img src="/images/supreme-treatment.jpg" data-original-image="supreme-treatment" alt="Supreme Fitness &amp; Massage treatment photograph" width="853" height="1280" fetchpriority="high" /><div class="image-fallback"><svg aria-hidden="true"><use href="#lotus" /></svg><span>Photo unavailable</span></div></figure>
           <div class="hero-caption"><span class="caption-script">Care that feels personal.</span><span class="caption-small">Your moment. Your space.</span></div>
           <div class="hero-seal" aria-hidden="true"><svg><use href="#lotus" /></svg><span>Pause.<br />Restore.</span></div>
+          <div id="spa-atmosphere"></div>
         </div></div>
         <div class="care-strip" aria-label="Visit essentials"><div><svg class="icon" aria-hidden="true"><use href="#pin" /></svg><p>Care, brought to you<span>At your chosen location</span></p></div><div><svg class="icon" aria-hidden="true"><use href="#clock" /></svg><p>Make a little space<span>60 or 90 minutes</span></p></div><div><svg class="icon" aria-hidden="true"><use href="#sparkle" /></svg><p>A moment worth sharing<span>Solo &amp; duo treatments</span></p></div></div>
+        </div>
       </section>
+      <section id="training" class="view training-view" aria-labelledby="training-title" hidden><div id="training-content"><div class="view-heading"><div><p class="eyebrow">PERSONAL TRAINING &amp; GYM</p><h1 id="training-title" tabindex="-1">Your goal.<br /><em>A plan for you.</em></h1><p>Personal training and gym coaching. Contact Supreme to discuss your goals, location, availability and prices.</p><a class="button" href="https://supremefitnessmassage.com/home">Contact Supreme</a></div></div></div></section>
       <section id="treatments" class="view treatments-view" aria-labelledby="treatments-title" hidden>
         <div class="view-heading treatments-heading"><div><p class="eyebrow">A little time, just for you</p><h1 id="treatments-title" tabindex="-1">Find your <em>moment.</em></h1><p>Unwind, recover or reconnect. Choose the care that fits your day.</p></div><div class="duration-control" role="group" aria-label="Treatment duration"><button type="button" data-duration="60" aria-pressed="true">60 minutes</button><button type="button" data-duration="90" aria-pressed="false">90 minutes</button></div></div>
         <div id="treatment-finder"></div>
@@ -80,7 +85,7 @@
           <details><summary>What does a mobile visit cost?<span aria-hidden="true">+</span></summary><p>Your treatment price plus travel. Within Antwerp, travel is estimated at €9.99–€14.99 per visit. Outside Antwerp, the fee is agreed with you based on total travel distance. The exact fee, including arrangements for two therapists, is confirmed before booking.</p></details>
           <details><summary>Is my preferred time available?<span aria-hidden="true">+</span></summary><p>Dates and times are preferences until Supreme confirms them. Live calendar availability is not connected.</p></details>
           <details><summary>Can I book a subscription?<span aria-hidden="true">+</span></summary><p>Subscription plans, prices and billing terms are still being prepared. No membership can be purchased or activated yet.</p><button class="text-link" type="button" data-subscriptions>Subscription details <svg class="icon external-arrow" aria-hidden="true"><use href="#arrow" /></svg></button></details>
-          <details><summary>What happens to my details?<span aria-hidden="true">+</span></summary><p>Your request stays in this page until you choose to copy or download it. The site does not send your details automatically. Review contact details also stay in page memory until you clear them or leave Reviews. Copying, downloading or choosing an email handoff is your choice. Intro preferences use session storage; no payment details are collected.</p></details>
+          <details><summary>What happens to my details?<span aria-hidden="true">+</span></summary><p>Your request stays in this page until you choose to copy or download it. The site does not send your details automatically. Review contact details also stay in page memory until you clear them or leave Reviews. Copying, downloading or choosing an email handoff is your choice. Intro and gym or spa preferences use session storage; no payment details are collected.</p></details>
         </div><a class="text-link contact-link" href="https://supremefitnessmassage.com/home" target="_blank" rel="noopener noreferrer">Contact Supreme <svg class="icon external-arrow" aria-hidden="true"><use href="#arrow" /></svg><span class="sr-only"> (opens the original website in a new tab)</span></a></aside></div>
       </section>
       <section id="reviews" class="view reviews-view" aria-labelledby="reviews-title" hidden>
@@ -90,11 +95,11 @@
       </section>
     </main>
     <footer class="site-footer"><div class="footer-inner"><p>Supreme Fitness &amp; Massage<span class="footer-dot" aria-hidden="true">·</span><span>Care, with a personal touch.</span></p><div class="footer-actions"><button class="text-link" type="button" data-privacy>Privacy</button><a href="#reviews">Leave a review <svg class="icon external-arrow" aria-hidden="true"><use href="#arrow" /></svg></a><button id="replay-intro" type="button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10a9 9 0 1 1 1 7M3 4v6h6"/></svg>Replay intro</button><a href="https://supremefitnessmassage.com/home" target="_blank" rel="noopener noreferrer">Contact Supreme <svg class="icon external-arrow" aria-hidden="true"><use href="#arrow" /></svg><span class="sr-only"> (opens the original website in a new tab)</span></a></div></div></footer>
-    <div class="mobile-booking-bar"><div><span>Travel fee additional</span><strong>From €59.99</strong></div><button class="button" type="button" data-book>Request a visit <svg class="icon" aria-hidden="true"><use href="#arrow" /></svg></button></div>
+    <div class="mobile-booking-bar"><div><span>Start with your goal</span><strong>Personal training</strong></div><button class="button" type="button" data-book data-adaptive-book>Request a visit <svg class="icon" aria-hidden="true"><use href="#arrow" /></svg></button></div>
     <dialog id="privacy-dialog" class="privacy-dialog" aria-labelledby="privacy-title"><button type="button" class="dialog-close" aria-label="Close privacy information" data-close-privacy>×</button><p class="eyebrow">Privacy</p><h2 id="privacy-title">Privacy on this website</h2><div class="privacy-sections">
       <section><h3>Your details stay with you</h3><p>Appointment and review details stay in this page’s memory. They are cleared when you close the request, leave Reviews or reload. They are not automatically sent to Supreme or stored on a server.</p></section>
       <section><h3>Copies you choose to keep</h3><p>A copied or downloaded request or review remains on your device and can include your contact details. An email handoff opens your own email app; you decide whether to send it.</p></section>
-      <section><h3>Simple browser preferences</h3><p>Your language choice is remembered on this device when browser storage is available. The intro preference lasts for the session. This site does not use analytics or advertising trackers.</p></section>
+      <section><h3>Simple browser preferences</h3><p>Your language choice is remembered on this device when browser storage is available. The intro preference and gym or spa selection last for the session. This site does not use analytics or advertising trackers.</p></section>
       <section><h3>Links to other websites</h3><p>Contact links open Supreme’s original website. External websites and email providers have their own privacy practices.</p></section>
     </div></dialog>
     <dialog id="gallery-dialog" class="gallery-dialog" aria-labelledby="gallery-caption"><button id="gallery-close" class="dialog-close" type="button" aria-label="Close photo">×</button><div class="lightbox-image-wrap"><img id="gallery-image" alt="" /><p id="gallery-unavailable" hidden>Photo unavailable</p></div><div class="lightbox-bottom"><button id="gallery-prev" class="gallery-control" type="button" aria-label="Previous photo"><svg class="icon previous-arrow" aria-hidden="true"><use href="#arrow" /></svg></button><p id="gallery-caption"></p><button id="gallery-next" class="gallery-control" type="button" aria-label="Next photo"><svg class="icon" aria-hidden="true"><use href="#arrow" /></svg></button></div></dialog>
@@ -111,6 +116,7 @@
       <button class="button secondary" id="skip-intro" type="button">Skip intro <svg class="icon" aria-hidden="true"><use href="#arrow" /></svg></button>
     </dialog>
     <noscript><div class="noscript-notice"><p>You can explore the treatment menu and visit information below. Language switching, request preparation and the photo viewer need JavaScript. Please <a href="https://supremefitnessmassage.com/home" rel="noopener noreferrer">contact Supreme</a> for an appointment.</p></div><style>.view[hidden]{display:block!important}.view{border-top:1px solid #d7d9cc}.service-grid:empty::before{content:'Relaxing Oil, Foot, or Head & Neck: €59.99 / 60 min, €74.99 / 90 min. Deep Tissue, Sports & Thai Combination: €64.99 / 60 min, €79.99 / 90 min. Duo Relaxing Oil: €119.99 / 60 min, €139.99 / 90 min. Duo Sports & Oil: €124.99 / 60 min, €144.99 / 90 min. Duo prices are totals for two people.';line-height:1.9}[data-privacy],.language-bar,[data-book],.duration-control,.filters,.menu-photo-link,[data-subscriptions],.gallery-hint,.mobile-booking-bar,#replay-intro{display:none!important}.site-footer{padding-bottom:20px!important}</style></noscript>
+    <div id="experience-system"></div>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

@@ -506,9 +506,9 @@ export const messages = {
     "fr": "Que deviennent mes données ?",
     "nl": "Wat gebeurt er met mijn gegevens?"
   },
-  "Your request stays in this page until you choose to copy or download it. The site does not send your details automatically. Review contact details also stay in page memory until you clear them or leave Reviews. Copying, downloading or choosing an email handoff is your choice. Intro preferences use session storage; no payment details are collected.": {
-    "fr": "Votre demande reste sur cette page jusqu’à ce que vous la copiiez ou la téléchargiez. Le site n’envoie pas vos données automatiquement. Les coordonnées liées aux avis restent aussi en mémoire jusqu’à leur effacement ou votre départ de la rubrique Avis. Vous choisissez de copier, télécharger ou ouvrir un e-mail. La préférence d’introduction est conservée pour la session ; aucune donnée de paiement n’est recueillie.",
-    "nl": "Je aanvraag blijft op deze pagina totdat je die kopieert of downloadt. De site verstuurt je gegevens niet automatisch. Contactgegevens bij reviews blijven ook in het paginageheugen totdat je ze wist of Reviews verlaat. Je kiest zelf of je kopieert, downloadt of een e-mail opent. De introvoorkeur wordt voor de sessie bewaard; er worden geen betaalgegevens verzameld."
+  "Your request stays in this page until you choose to copy or download it. The site does not send your details automatically. Review contact details also stay in page memory until you clear them or leave Reviews. Copying, downloading or choosing an email handoff is your choice. Intro and gym or spa preferences use session storage; no payment details are collected.": {
+    "fr": "Votre demande reste sur cette page jusqu’à ce que vous la copiiez ou la téléchargiez. Le site n’envoie pas vos données automatiquement. Les coordonnées liées aux avis restent aussi en mémoire jusqu’à leur effacement ou votre départ de la rubrique Avis. Vous choisissez de copier, télécharger ou ouvrir un e-mail. La préférence d’introduction et le choix entre fitness et spa sont conservés pour la session ; aucune donnée de paiement n’est recueillie.",
+    "nl": "Je aanvraag blijft op deze pagina totdat je die kopieert of downloadt. De site verstuurt je gegevens niet automatisch. Contactgegevens bij reviews blijven ook in het paginageheugen totdat je ze wist of Reviews verlaat. Je kiest zelf of je kopieert, downloadt of een e-mail opent. De introvoorkeur en je keuze voor fitness of spa worden voor de sessie bewaard; er worden geen betaalgegevens verzameld."
   },
   "Contact Supreme": {
     "fr": "Contacter Supreme",
@@ -1385,3 +1385,9 @@ export const messages = {
 };
 
 Object.assign(messages, visitorMessages, treatmentFinderMessages);
+
+Object.assign(messages, {
+  'Training': { fr: 'Coaching', nl: 'Training' },
+  'Personal training, gym coaching, massage and recovery in Antwerp and surrounding areas.': { fr: 'Coaching personnel, fitness, massage et récupération à Anvers et dans ses environs.', nl: 'Personal training, fitnesscoaching, massage en herstel in Antwerpen en omgeving.' },
+  'Supreme Fitness & Massage — Train. Recover. Feel supreme.': { fr: 'Supreme Fitness & Massage — Bouger. Récupérer. Se sentir Supreme.', nl: 'Supreme Fitness & Massage — Train. Herstel. Voel je Supreme.' }
+});

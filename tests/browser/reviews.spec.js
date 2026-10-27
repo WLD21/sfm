@@ -1,4 +1,10 @@
 import { test, expect } from '@playwright/test';
+
+// Retain the existing massage regression suite in its original spa context.
+// dual-experience.spec.js separately verifies the new default training journey.
+test.beforeEach(async ({ page }) => {
+  await page.addInitScript(() => sessionStorage.setItem('sfm-experience', 'spa'));
+});
 import { readFile } from 'node:fs/promises';
 
 async function enterReview(page, { rating = 5, contactType = 'email', contact = 'visitor@example.com', experience = 'A calm and welcoming treatment. I felt relaxed afterwards.' } = {}) {

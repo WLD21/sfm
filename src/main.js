@@ -18,12 +18,13 @@ import { setupReviews } from './reviews.js';
 import { setupTreatmentFinder } from './treatment-finder.js';
 import { getSubscriptionState } from './commerce.js';
 import { siteConfig } from './site.config.js';
+import { setupExperience } from './experience.jsx';
 
 setupLanguage();
 const { openBooking } = setupBooking();
 const { clearReview } = setupReviews(siteConfig.reviews);
 let activeView;
-const viewNames = ['home', 'treatments', 'showcase', 'visit', 'reviews'];
+const viewNames = ['home', 'training', 'treatments', 'showcase', 'visit', 'reviews'];
 let selectedDuration = 60;
 let selectedFilter = 'all';
 let motion;
@@ -40,10 +41,12 @@ function navigate({ focus = false } = {}) {
     else link.removeAttribute('aria-current');
   });
   if (focus) {
-    document.getElementById(`${viewName}-title`).focus({ preventScroll: true });
+    const headingId = viewName === 'home' && document.body.dataset.experience !== 'spa' ? 'gym-home-title' : `${viewName}-title`;
+    document.getElementById(headingId)?.focus({ preventScroll: true });
     window.scrollTo({ top: 0, behavior: 'instant' });
   }
   motion?.enterView(viewName);
+  document.dispatchEvent(new CustomEvent('viewchange', { detail: { view: viewName } }));
 }
 window.addEventListener('hashchange', () => navigate({ focus: true }));
 document.querySelector('.skip-link').addEventListener('click', event => {
@@ -51,7 +54,12 @@ document.querySelector('.skip-link').addEventListener('click', event => {
   document.querySelector('#main').focus();
 });
 document.querySelectorAll('[data-view]').forEach((link) => {
-  link.addEventListener('click', () => { if (location.hash === link.hash) navigate({ focus: true }); });
+  link.addEventListener('click', event => {
+    if (location.hash === link.hash) {
+      event.preventDefault();
+      navigate({ focus: true });
+    }
+  });
 });
 navigate();
 
@@ -91,7 +99,12 @@ function renderServices() {
 }
 document.addEventListener('click', (event) => {
   const book = event.target.closest('[data-book]');
-  if (book) { event.preventDefault(); openBooking(book.dataset.book || undefined, selectedDuration); }
+  if (book) {
+    event.preventDefault();
+    if (book.hasAttribute('data-adaptive-book') && document.body.dataset.experience !== 'spa') {
+      document.dispatchEvent(new CustomEvent('trainingrequest'));
+    } else openBooking(book.dataset.book || undefined, selectedDuration);
+  }
   const duration = event.target.closest('[data-duration]');
   if (duration) { selectedDuration = Number(duration.dataset.duration); renderServices(); }
   const filter = event.target.closest('[data-filter]');
@@ -213,3 +226,5 @@ privacyDialog.querySelector('[data-close-privacy]').addEventListener('click', ()
 const syncDialogScroll = () => document.body.classList.toggle('modal-open', Boolean(document.querySelector('dialog[open]')));
 new MutationObserver(syncDialogScroll).observe(document.body, { subtree: true, attributes: true, attributeFilter: ['open'] });
 syncDialogScroll();
+
+setupExperience();
