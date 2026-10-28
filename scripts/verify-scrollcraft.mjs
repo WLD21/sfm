@@ -19,7 +19,7 @@ try {
   for (const mode of ['gym', 'spa']) {
     for (const [size, width, height, reduced] of [['desktop', 1440, 900, false], ['mobile', 390, 844, false], ['reduced', 390, 844, true]]) {
       const out = 'docs/previews/scroll-' + mode + '-' + size;
-      const args = ['tools/scroll-craft/scripts/shoot.mjs', '--url', 'http://127.0.0.1:4208/?lang=en&experience=' + mode, '--out', out, '--width', String(width), '--height', String(height), '--steps', '4'];
+      const args = ['tools/scroll-craft/scripts/shoot.mjs', '--url', 'http://127.0.0.1:4208/?lang=en&intro=skip&experience=' + mode, '--out', out, '--width', String(width), '--height', String(height), '--steps', '4'];
       if (reduced) args.push('--reduced-motion');
       const result = spawnSync(process.execPath, args, { env: harnessEnvironment, encoding: 'utf8', timeout: 180000, maxBuffer: 8 * 1024 * 1024 });
       process.stdout.write(result.stdout || ''); process.stderr.write(result.stderr || '');

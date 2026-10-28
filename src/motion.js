@@ -164,8 +164,8 @@ export function setupMotion() {
     applyPreference();
   });
   if (replay) replay.hidden = motionDisabled();
-  let seen = false;
-  try { seen = sessionStorage.getItem('sfm-intro-seen') === '1'; } catch { /* No storage required. */ }
+  let seen = new URLSearchParams(location.search).get('intro') === 'skip';
+  try { seen ||= sessionStorage.getItem('sfm-intro-seen') === '1'; } catch { /* No storage required. */ }
   if (!seen) playIntro();
   document.addEventListener('experiencechange', () => enterView(activeView));
   return { enterView };

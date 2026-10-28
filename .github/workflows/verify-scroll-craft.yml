@@ -38,7 +38,7 @@ jobs:
       - name: Check the browser already included in the runner
         run: google-chrome --version
       - name: Browser regression and new experience checks
-        run: npm run test:browser -- --workers=2
+        run: npm run test:browser -- --workers=1
       - name: Build website and self-contained HTML
         run: npm run build
       - name: Verify the exact standalone file offline
@@ -66,7 +66,24 @@ jobs:
               assert z.testzip() is None
               assert 'Supreme-Fitness-Massage/src/experience.jsx' in z.namelist()
               assert 'Supreme-Fitness-Massage/OPEN-WEBSITE.html' in z.namelist()
-              assert len(z.namelist()) > 25
+              required = [
+                  'package.json', 'package-lock.json', 'vite.config.js',
+                  'src/scene-renderer.js', 'src/experience-scenes.jsx',
+                  'src/scroll-experience.js', 'src/scroll-design.css',
+                  'tools/scroll-craft/SKILL.md', 'tools/scroll-craft/LICENSE',
+                  'tools/scroll-craft/engine/scrollcraft.js', 'tools/scroll-craft/engine/scrollcraft.css',
+                  'public/images/scene-gym-desktop.png', 'public/images/scene-gym-mobile.png',
+                  'public/images/scene-spa-desktop.png', 'public/images/scene-spa-mobile.png',
+                  'public/images/supreme-treatment.jpg', 'public/images/massage-session.jpg',
+                  'public/images/personal-care.jpg', 'public/images/training-certificate.jpg',
+                  'public/images/supreme-poster.jpg', 'public/images/treatment-menu.jpg',
+                  'dist/index.html', 'OPEN-WEBSITE.html'
+              ]
+              for required_path in required:
+                  entry = z.getinfo('Supreme-Fitness-Massage/' + required_path)
+                  assert entry.file_size > 0, required_path
+              assert z.getinfo('Supreme-Fitness-Massage/OPEN-WEBSITE.html').file_size > 1000000
+              assert len(z.namelist()) > 100
               print('Verified source ZIP entries:', len(z.namelist()))
           PY
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
