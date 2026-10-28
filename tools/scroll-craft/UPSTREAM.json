@@ -3,5 +3,32 @@
   "commit": "75d81f74e83692add18cd7a8a8e078b8a887a579",
   "sourceDirectory": "plugins/nateherk-design/skills/scroll-craft",
   "license": "MIT",
-  "note": "Complete unchanged skill source, used directly from the project. This is not a personal Skills installation."
+  "note": "Complete unchanged skill source, used directly from the project. This is not a personal Skills installation.",
+  "files": {
+    "LICENSE": "d24ab435093a0c0dd35f31f68224ee276c9cc2ef",
+    "CHANGELOG.md": "e811e8cabe6047aec1e3484b3f4cafb99a5a7349",
+    "SKILL.md": "ac879a75e6b8a07cf1c431d421623bb954d3caba",
+    "engine/scrollcraft.css": "62ee4f84e249f24f0939673cbf98befd0e2f3d09",
+    "engine/scrollcraft.js": "439bc30ef4eb6721506a76ca990e2b8681b380d4",
+    "references/approved-collection.md": "1b9232e30c0a950ca016fa24a1f98b1e72fab79b",
+    "references/assets.md": "9385dd73e70ad112c4e1106d8ed34cacf41b786a",
+    "references/device-diag.html": "ead92bbeda5959e413aafb754bcaffae6dd8df15",
+    "references/devices.md": "720a3c653448c76b6dad19dffb71e10e9d37b1af",
+    "references/feel.md": "a95f973cd90b04c58c9afa526edacd815c762e47",
+    "references/hero-depth.md": "2545730357bf0b549a2ae28380ed3028ade13b35",
+    "references/taste.md": "d9e986939b34c2452d83b6f4f61a41f1c405f39c",
+    "references/template.html": "5e03f96ef21b61c26b97e3a3ba7ffcf3220628e1",
+    "references/uniqueness.md": "ec7b8b3c9337a226104c7742b9953d3ff7f30596",
+    "references/verify.md": "1ff5e1c63cb9fad5c27ad1b36bba9286409c051b",
+    "references/worldflight.md": "bda0ae3ddce1b133cbbd80ee5a0bd8d8be92c0f8",
+    "references/worlds.md": "ea54a350a0cede1d29718df7a4789cb2fae14b79",
+    "scripts/doctor.mjs": "613100c84ed8bc91caa9e38f3054c7017098d1c3",
+    "scripts/encode.sh": "fa4858dd2d79fde631bd394cae77af2223d5b711",
+    "scripts/kie.mjs": "dde564fafca2e00e1b79645ca7e9229742f549f1",
+    "scripts/serve.mjs": "b51701f864078ed68220c34180245f567ac91047",
+    "scripts/shoot.mjs": "7962f765cc5bac9de2f232167db60471980b3843",
+    "scripts/workspace.mjs": "e9481d64b1468f91b021b4ac0099af8d55eb3e9e",
+    "scripts/worldflight-assert.mjs": "28802ee9074e3c4cd4b65f83e500b04cce90255c",
+    "templates/FINGERPRINTS.md": "d4798d63e93b5336df2c2af2d8bf612a79f19ca4"
+  }
 }

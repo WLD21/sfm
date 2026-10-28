@@ -27,7 +27,9 @@ jobs:
           sudo apt-get update -qq
           sudo apt-get install -y --no-install-recommends ffmpeg
       - name: Run the unmodified upstream preflight
-        run: node tools/scroll-craft/scripts/doctor.mjs
+        run: |
+          node scripts/verify-skill-source.mjs
+          node tools/scroll-craft/scripts/doctor.mjs
       - name: Capture exact fallbacks from the final 3D scenes
         run: npm run capture:scenes
       - name: Unit checks

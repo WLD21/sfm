@@ -2,9 +2,9 @@
 
 ## Gym and spa experience
 
-The homepage now leads with **personal training and gym coaching**. The persistent Training & gym / Spa & recovery switch fades the header, main content and footer together, changing the whole site's palette. The gym uses an animated dumbbell illustration; the spa keeps the original photography and adds swaying palms, rising steam and a warm sauna illustration. The illustration is decorative and does not assert that Supreme owns a sauna facility.
+The homepage now leads with **personal training and gym coaching**. The persistent Training & gym / Spa & recovery switch fades the header, main content and footer together, changing the whole site's palette. The gym uses real Three.js dumbbells with a scroll assembly and training-focus selector; the spa keeps the original photography and adds swaying palms, rising steam and a warm sauna illustration. The illustration is decorative and does not assert that Supreme owns a sauna facility.
 
-React components are added to the existing Vite application, preserving its massage menu, original photos, reviews, translations and request-only booking behavior. GSAP handles theme transitions and scene motion. Animations stop off-screen, when the browser tab is hidden or the pause control is enabled, and respect reduced-motion preferences. Failed animation imports restore the visible page automatically.
+React components are added to the existing Vite application, preserving its massage menu, original photos, reviews, translations and request-only booking behavior. GSAP handles theme transitions, Scroll Craft coordinates scroll devices, and a lazy Three.js renderer draws the two material scenes. Animations stop off-screen, when the browser tab is hidden or the pause control is enabled, and respect reduced-motion preferences. Failed animation imports restore the visible page automatically.
 
 The new Training page describes three coaching goals without inventing prices or credentials. Training enquiries validate contact fields, show an explicit unsent review, and can be copied or downloaded before contacting Supreme. Closing the enquiry clears entered details. No booking, payment, subscription or delivery backend is simulated.
 
@@ -13,13 +13,13 @@ English, French and Dutch are included for all new interface text. The selected 
 Use `npm install` once after adding React, then the existing development commands. The verification workflow resolves the dependency lock, runs the existing massage regressions in spa mode plus the new gym tests, regenerates the build and standalone HTML, verifies the standalone offline, and saves generated output to the same feature branch only when its source head has not changed. A passing workflow also creates a tested source ZIP.
 
 
-A Vite / JavaScript website with a warm beige, cream and gold design, restrained green accents, geometric contour backgrounds and readable typography. Includes the six original photographs, the twelve original EUR service prices, locally bundled bold Lora titles, Outfit action labels and Manrope body fonts, compact mobile navigation, a skippable GSAP intro, an editorial gallery animated with ScrollTrigger, a treatment finder, a four-step appointment-request flow with mobile visits and travel estimates, visit preparation guidance, and a five-star review form with private email or phone contact.
+A Vite / JavaScript website with a warm beige, cream and gold design, restrained green accents, geometric contour backgrounds and readable typography. Includes the six original photographs, the twelve original EUR service prices, locally bundled Outfit titles and action labels with Manrope body text, compact mobile navigation, a skippable GSAP intro, an editorial gallery animated with ScrollTrigger, a treatment finder, a four-step appointment-request flow with mobile visits and travel estimates, visit preparation guidance, and a five-star review form with private email or phone contact.
 
 The approved standalone HTML was recovered directly from its recorded file identity. The broken Windows workspace and earlier unverified ZIP were not used. Image bytes and dimensions were checked against the original embedded JPEGs; see `docs/ASSET-PROVENANCE.json`.
 
 ## Run locally
 
-**To view the design immediately, double-click `OPEN-WEBSITE.html`.** That standalone file embeds the CSS, JavaScript, GSAP, fonts and all six photos. It needs no server or installation to display. Use a normal browser, rather than an attachment's text/code viewer.
+**To view the design immediately, double-click `OPEN-WEBSITE.html`.** That standalone file embeds the CSS, JavaScript, React, Three.js, GSAP, Scroll Craft, fonts, six original photos and four exact 3D posters. It needs no server or installation to display. Use a normal browser, rather than an attachment's text/code viewer.
 
 The instructions below are for editing the source. The developer `index.html` is different from the standalone file and needs Vite to load its CSS/JavaScript correctly.
 

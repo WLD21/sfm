@@ -14,7 +14,7 @@ The design brief and authored interaction score are in scrollcraft/builds/suprem
 
 ## Resilience and performance
 
-Three.js loads only for a visible scene when reduced motion is off. Only one context exists at a time. Offscreen scenes, hidden tabs and inactive views dispose GPU resources. Pause stops rendering; touch limits to 30 fps and 1.4 device pixel ratio. Fine pointers cap at 1.75. No pointer lock or capture, remote models or third-party media requests.
+Three.js loads only for a visible scene when reduced motion is off. Only one context exists at a time. Intro, mode transitions and open forms suspend the 3D layer. Offscreen scenes, hidden tabs and inactive views dispose GPU resources. Pause stops rendering; animation is capped at 30 fps, touch density at 1.25 and desktop density at 1.5. Slow renderers reduce resolution and frame rate automatically. No pointer lock or capture, remote models or third-party media requests.
 
 Four exact rest-frame posters are generated from the final models by scripts/capture-scenes.mjs. Reduced motion, unsupported WebGL and context loss use those posters. If a poster itself is unavailable, the original SVG illustration remains as a final fallback. All assets are embedded in OPEN-WEBSITE.html.
 

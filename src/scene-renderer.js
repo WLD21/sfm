@@ -1,6 +1,5 @@
 // Real, local geometry; no remote models, trackers, HDRs or media requests.
 import * as THREE from 'three';
-import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
 const clamp = THREE.MathUtils.clamp;
 const smooth = (a, b, t) => a + (b - a) * t;
@@ -52,10 +51,12 @@ function dumbbell(materials) {
   const grip = mesh(new THREE.CylinderGeometry(.135, .135, .89, 48), materials.grip, root);
   grip.rotation.z = Math.PI / 2;
   // Fine machined rings catch the light instead of painting a flat grey handle.
+  const rings = new THREE.InstancedMesh(new THREE.TorusGeometry(.137, .006, 4, 40), materials.chrome, 23);
+  const ringPose = new THREE.Object3D(); ringPose.rotation.y = Math.PI / 2;
   for (let i = -11; i <= 11; i++) {
-    const ring = mesh(new THREE.TorusGeometry(.137, .006, 4, 40), materials.chrome, root, i * .034);
-    ring.rotation.y = Math.PI / 2;
+    ringPose.position.x = i * .034; ringPose.updateMatrix(); rings.setMatrixAt(i + 11, ringPose.matrix);
   }
+  root.add(rings);
   for (const side of [-1, 1]) {
     const end = new THREE.Group(); end.position.x = side * .77; root.add(end);
     roundedPlate(end, materials.rubber, .64, .32, side * .04);
@@ -113,17 +114,16 @@ function palm(parent, wood, leafMaterial, x, y, z, scale = 1) {
     const frond = new THREE.Group(); frond.rotation.y = angle; crown.add(frond);
     const path = new THREE.CatmullRomCurve3([new THREE.Vector3(), new THREE.Vector3(.4, .3, 0), new THREE.Vector3(.9, .04, 0), new THREE.Vector3(1.13, -.2, 0)]);
     mesh(new THREE.TubeGeometry(path, 16, .009, 5, false), leafMaterial, frond);
+    const vertices = [];
     for (let i = 1; i < 13; i++) {
       const t = i / 14, p = path.getPoint(t), width = Math.sin(t * Math.PI) * .29;
-      for (const side of [-1, 1]) {
-        const geometry = new THREE.BufferGeometry();
-        geometry.setAttribute('position', new THREE.Float32BufferAttribute([
-          p.x - .05, p.y, 0, p.x + .08, p.y + .015, 0, p.x + .11, p.y - .08, side * width,
-        ], 3));
-        geometry.computeVertexNormals();
-        mesh(geometry, leafMaterial, frond);
-      }
+      for (const side of [-1, 1]) vertices.push(
+        p.x - .05, p.y, 0, p.x + .08, p.y + .015, 0, p.x + .11, p.y - .08, side * width,
+      );
     }
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+    geometry.computeVertexNormals(); mesh(geometry, leafMaterial, frond);
   }
   return crown;
 }
@@ -199,10 +199,19 @@ export function createScene(host, kind, onFail) {
   host.append(canvas);
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(35, 1, .1, 50);
-  const pmrem = new THREE.PMREMGenerator(renderer);
-  const room = new RoomEnvironment();
-  const env = pmrem.fromScene(room, .04); scene.environment = env.texture;
-  room.dispose(); pmrem.dispose();
+  // Six painted studio softboxes supply reflections without rendering an
+  // entire room into six costly cubemap faces for each scene switch.
+  const faces = Array.from({ length: 6 }, (_, i) => {
+    const image = document.createElement('canvas'); image.width = image.height = 64;
+    const ctx = image.getContext('2d'), gradient = ctx.createLinearGradient(0, 0, 64, 64);
+    gradient.addColorStop(0, i === 2 ? '#fffef4' : '#d9dfd0');
+    gradient.addColorStop(1, i === 3 ? '#465042' : '#7e8b78');
+    ctx.fillStyle = gradient; ctx.fillRect(0, 0, 64, 64);
+    if (i !== 3) { ctx.fillStyle = '#ffffff'; ctx.fillRect(7, 4, 18, 48); }
+    return image;
+  });
+  const env = new THREE.CubeTexture(faces); env.colorSpace = THREE.SRGBColorSpace;
+  env.needsUpdate = true; scene.environment = env;
   scene.add(new THREE.HemisphereLight('#fffde9', '#5c6451', 2.3));
   const light = new THREE.DirectionalLight('#fff5db', 4.2); light.position.set(-3, 6, 4); scene.add(light);
   const fill = new THREE.DirectionalLight('#e0ead4', 1.8); fill.position.set(4, 1, -2); scene.add(fill);
@@ -215,6 +224,7 @@ export function createScene(host, kind, onFail) {
   const shadow = mesh(new THREE.PlaneGeometry(5.4, 4.1), new THREE.MeshBasicMaterial({ map: shadowTexture, transparent: true, depthWrite: false }), scene, 0, -1.07, .1);
   shadow.rotation.x = -Math.PI / 2;
   let frame = 0, disposed = false, running = false, last = 0, clock = 0, count = 0;
+  let frameBudget = 33, resolutionLimit = 1.5;
   let settings = { motion: false, focus: 'strength' }, progress = 0;
   const pointer = { x: 0, y: 0 };
   const coarse = matchMedia('(pointer: coarse)').matches;
@@ -235,7 +245,17 @@ export function createScene(host, kind, onFail) {
     if (settings.motion) clock += dt;
     progress = settings.motion ? smooth(progress, readProgress(), .1) : 0;
     const state = world.update({ ...settings, time: clock, progress, pointer: settings.motion ? pointer : { x: 0, y: 0 } });
+    const started = performance.now();
     renderer.render(scene, camera);
+    const elapsed = performance.now() - started;
+    // Do not let expensive software/GPU rendering monopolize the main thread.
+    if (count > 2 && elapsed > 55) {
+      frameBudget = Math.max(66, Math.min(140, elapsed * 1.5));
+      if (resolutionLimit > 1) {
+        resolutionLimit = 1;
+        renderer.setPixelRatio(1); renderer.setSize(host.clientWidth, host.clientHeight, false);
+      }
+    }
     host.dataset.sceneReady = 'true';
     host.dataset.sceneFrames = String(++count);
     host.dataset.scVerifyState = state.map(n => n.toFixed(3)).join(',');
@@ -244,14 +264,14 @@ export function createScene(host, kind, onFail) {
   function tick(now) {
     if (!running || disposed) return;
     // A touch screen gets a deliberately smaller 30fps GPU budget.
-    if (!coarse || !last || now - last >= 32) render(now);
+    if (!last || now - last >= frameBudget) render(now);
     frame = requestAnimationFrame(tick);
   }
   function resize() {
     if (disposed) return;
     const w = host.clientWidth, h = host.clientHeight;
     if (!w || !h) return;
-    renderer.setPixelRatio(Math.min(devicePixelRatio || 1, coarse ? 1.4 : 1.75));
+    renderer.setPixelRatio(Math.min(devicePixelRatio || 1, resolutionLimit, coarse || innerWidth < 641 ? 1.25 : 1.5));
     renderer.setSize(w, h, false); camera.aspect = w / h;
     const narrow = w / h < 1.2;
     camera.position.set(kind === 'spa' ? 3.8 : 3.3, kind === 'spa' ? 2.4 : 2.15, kind === 'spa' ? 5.6 : 6.1);

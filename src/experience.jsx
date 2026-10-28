@@ -26,13 +26,15 @@ function App() {
   const [active, setActive] = useState(() => document.body.dataset.activeView || 'home');
   const [visible, setVisible] = useState(() => !document.hidden);
   const [busy, setBusy] = useState(false);
+  const [overlayOpen, setOverlayOpen] = useState(() => Boolean(document.querySelector('dialog[open]')));
   const [request, setRequest] = useState(null);
   const [announcement, setAnnouncement] = useState('');
   const transition = useRef(null);
   const transitionGeneration = useRef(0);
   const fallback = useRef(null);
   const c = experienceCopy[language] || experienceCopy.en;
-  const animate = !paused && !reduced && visible && active === 'home';
+  const sceneEnabled = visible && active === 'home' && !busy && !overlayOpen && !request;
+  const animate = !paused && !reduced && sceneEnabled;
   const surfaces = () => [...document.querySelectorAll('.site-header, .site-main, .site-footer, .mobile-booking-bar')];
 
   function restoreSurfaces() {
@@ -108,6 +110,10 @@ function App() {
 
   useEffect(() => {
     const media = matchMedia('(prefers-reduced-motion: reduce)');
+    const checkOverlay = () => setOverlayOpen(Boolean(document.querySelector('dialog[open]')));
+    const dialogs = new MutationObserver(checkOverlay);
+    dialogs.observe(document.body, { attributes: true, attributeFilter: ['open'], subtree: true });
+    checkOverlay();
     const onMedia = () => {
       setReduced(media.matches);
       if (media.matches) {
@@ -128,6 +134,7 @@ function App() {
     document.addEventListener('trainingrequest', onRequest);
     media.addEventListener('change', onMedia);
     return () => {
+      dialogs.disconnect();
       document.removeEventListener('languagechange', onLanguage);
       document.removeEventListener('viewchange', onView);
       document.removeEventListener('visibilitychange', onVisibility);
@@ -183,7 +190,7 @@ function App() {
       </div>
       <div className="gym-art hero-art">
         <div className="scene-topline"><span>{c.sceneLabel}</span></div>
-        <GymScene animate={animate && mode === 'gym'} enabled={visible && active === 'home' && mode === 'gym'} focus={selectedGoal} reduced={reduced} />
+        <GymScene animate={animate && mode === 'gym'} enabled={sceneEnabled && mode === 'gym'} focus={selectedGoal} reduced={reduced} />
         <div className="scene-caption"><strong>{c.sceneTitle}</strong><span>{c.sceneHint}</span></div>
         <span className="scene-arc" data-sc-parallax="-.06" aria-hidden="true" />
       </div>
@@ -209,7 +216,7 @@ function App() {
     {createPortal(switcher, document.getElementById('experience-switcher'))}
     {createPortal(gym, document.getElementById('gym-home'))}
     {createPortal(trainingView, document.getElementById('training-content'))}
-    {createPortal(<div className="spa-atmosphere-card"><SpaScene animate={animate && mode === 'spa'} enabled={visible && active === 'home' && mode === 'spa'} reduced={reduced} /><p><span aria-hidden="true">✳</span>{c.spaAtmosphere}</p></div>, document.getElementById('spa-atmosphere'))}
+    {createPortal(<div className="spa-atmosphere-card"><SpaScene animate={animate && mode === 'spa'} enabled={sceneEnabled && mode === 'spa'} reduced={reduced} /><p><span aria-hidden="true">✳</span>{c.spaAtmosphere}</p></div>, document.getElementById('spa-atmosphere'))}
     {request && <TrainingRequest request={request} copy={c} onClose={() => setRequest(null)} />}
     <p className="sr-only" role="status">{announcement}</p>
   </>;

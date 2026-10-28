@@ -42,8 +42,18 @@ test('training is the default and both worlds remain accessible at phone and des
 test('the whole site fades when switching, restores visible surfaces and remembers the selected experience', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await page.goto('/?lang=en');
+  await page.evaluate(() => {
+    window.__fadeSamples = [];
+    const header = document.querySelector('.site-header');
+    const until = performance.now() + 1400;
+    const sample = () => {
+      window.__fadeSamples.push(Number(getComputedStyle(header).opacity));
+      if (performance.now() < until) requestAnimationFrame(sample);
+    };
+    requestAnimationFrame(sample);
+  });
   await page.locator('[data-experience-choice="spa"]').click();
-  await expect.poll(() => page.locator('.site-header').evaluate(node => Number(getComputedStyle(node).opacity)), { intervals: [20] }).toBeLessThan(.96);
+  await expect.poll(() => page.evaluate(() => Math.min(...window.__fadeSamples))).toBeLessThan(.96);
   await expect(page.locator('body')).toHaveAttribute('data-experience', 'spa');
   await expect(page.locator('[data-experience-choice="spa"]')).toBeEnabled();
   for (const selector of ['.site-header', '.site-main', '.site-footer']) await expect(page.locator(selector)).toHaveCSS('opacity', '1');

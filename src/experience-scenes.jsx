@@ -20,14 +20,14 @@ function Scene({ kind, animate, enabled = true, focus = 'strength', reduced = fa
   useEffect(() => {
     let canceled = false;
     if (!enabled || !onscreen || failed || reduced) return;
-    import('./scene-renderer.js').then(({ createScene }) => {
+    const timer = setTimeout(() => import('./scene-renderer.js').then(({ createScene }) => {
       if (canceled) return;
       try {
         api.current = createScene(host.current, kind, () => setFailed(true));
         api.current.update(settings.current);
       } catch { setFailed(true); }
-    }).catch(() => { if (!canceled) setFailed(true); });
-    return () => { canceled = true; api.current?.dispose(); api.current = null; };
+    }).catch(() => { if (!canceled) setFailed(true); }), 180);
+    return () => { canceled = true; clearTimeout(timer); api.current?.dispose(); api.current = null; };
   }, [enabled, onscreen, kind, failed, reduced]);
   useEffect(() => { api.current?.update({ motion: animate, focus }); }, [animate, focus]);
   const Fallback = kind === 'gym' ? GymFallback : SpaFallback;

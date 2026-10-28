@@ -38,9 +38,9 @@ test('scroll progress moves rendered weights and pause holds actual GPU frames',
   await page.goto('/?lang=en');
   const scene = page.locator('[data-scene="gym"]');
   await expect(scene).toHaveAttribute('data-scene-ready', 'true', { timeout: 30000 });
-  const initial = await scene.getAttribute('data-sc-verify-state');
+  const initial = Number((await scene.getAttribute('data-sc-verify-state')).split(',')[3]);
   await page.evaluate(() => scrollTo({ top: 180, behavior: 'instant' }));
-  await expect.poll(() => scene.getAttribute('data-sc-verify-state')).not.toBe(initial);
+  await expect.poll(async () => Math.abs(Number((await scene.getAttribute('data-sc-verify-state')).split(',')[3]) - initial)).toBeGreaterThan(.05);
   await page.evaluate(() => document.querySelector('.motion-control').click());
   await expect(page.locator('body')).toHaveAttribute('data-motion', 'paused');
   const frames = await scene.getAttribute('data-scene-frames');

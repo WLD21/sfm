@@ -18,7 +18,10 @@ try {
       if (result.status !== 0) throw new Error('Upstream harness failed: ' + mode + ' ' + size);
       await writeFile(out + '/harness.txt', result.stdout);
       const report = JSON.parse(await readFile(out + '/report.json', 'utf8'));
-      summaries.push({ mode, size, samples: Array.isArray(report) ? report.length : null, output: out });
+      if (report.consoleErrors?.length || report.failed?.length) throw new Error('Harness found browser errors or failed requests: ' + JSON.stringify({ errors: report.consoleErrors, failed: report.failed }));
+      if (/CONTRAST FAIL|CUES THAT NEVER PEAK|FROZEN CLIP|LEGS STUCK ON POSTER/.test(result.stdout)) throw new Error('Upstream harness reported a visual defect: ' + out);
+      if (!reduced && /DEAD SCROLL between/.test(result.stdout)) throw new Error('Unexpected dead scroll: ' + out);
+      summaries.push({ mode, size, samples: report.report.length, errors: report.consoleErrors.length, failedRequests: report.failed.length, output: out });
     }
   }
   await mkdir('docs/previews', { recursive: true });
