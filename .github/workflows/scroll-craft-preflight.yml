@@ -19,5 +19,9 @@ jobs:
         with:
           node-version: '22'
       - run: npm ci --no-audit --no-fund
+      - name: Install the full media tooling required by Scroll Craft
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends ffmpeg
       - run: node tools/scroll-craft/scripts/doctor.mjs
       - run: node tools/scroll-craft/scripts/workspace.mjs --ensure
