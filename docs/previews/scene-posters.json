@@ -1,0 +1,42 @@
+[
+  {
+    "mode": "gym",
+    "size": "desktop",
+    "path": "public/images/scene-gym-desktop.png",
+    "width": 564.671875,
+    "height": 508,
+    "bytes": 84838,
+    "sha256": "2b8362a4a2e131a334473148f4f05d3f319b6d074f82a9f06c4d49e807f0357e",
+    "source": "Final Three.js scene at rest, captured by Chrome"
+  },
+  {
+    "mode": "spa",
+    "size": "desktop",
+    "path": "public/images/scene-spa-desktop.png",
+    "width": 308,
+    "height": 234,
+    "bytes": 33265,
+    "sha256": "847f588df73075b6a657c82f63c3b64d02e9ed90ccc4459dd2f2ccae994e8b08",
+    "source": "Final Three.js scene at rest, captured by Chrome"
+  },
+  {
+    "mode": "gym",
+    "size": "mobile",
+    "path": "public/images/scene-gym-mobile.png",
+    "width": 352,
+    "height": 298,
+    "bytes": 41616,
+    "sha256": "28b635ad337b0b6ac60887fea1e71f28d33851f5213f5038e26c3d9247448146",
+    "source": "Final Three.js scene at rest, captured by Chrome"
+  },
+  {
+    "mode": "spa",
+    "size": "mobile",
+    "path": "public/images/scene-spa-mobile.png",
+    "width": 213,
+    "height": 160,
+    "bytes": 18740,
+    "sha256": "f6bc3b79c3e053c6e4e2a6b40cffdc32c62a9d877750e16d6bb71dd03a768711",
+    "source": "Final Three.js scene at rest, captured by Chrome"
+  }
+]

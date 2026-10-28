@@ -1,0 +1,171 @@
+{
+  "doc": {
+    "height": 1259,
+    "vh": 900,
+    "acts": [
+      "flow",
+      "flow",
+      "flow",
+      "flow",
+      "flow"
+    ],
+    "world": null
+  },
+  "report": [
+    {
+      "i": 0,
+      "y": 0,
+      "pct": 0,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 100% 0px 0px)"
+      ],
+      "act": "flow",
+      "stages": [],
+      "segs": [],
+      "custom": [
+        "0.000,0.000,-0.057,-0.770,-0.260"
+      ],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": ""
+    },
+    {
+      "i": 1,
+      "y": 57,
+      "pct": 16,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 100% 0px 0px)"
+      ],
+      "act": "flow",
+      "stages": [],
+      "segs": [],
+      "custom": [
+        "0.000,0.000,-0.042,-0.770,-0.260"
+      ],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": ""
+    },
+    {
+      "i": 2,
+      "y": 204,
+      "pct": 57,
+      "settled": true,
+      "contrast": [],
+      "cues": [],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 99.51% 0px 0px)"
+      ],
+      "act": "flow",
+      "stages": [],
+      "segs": [],
+      "custom": [
+        "0.012,0.000,-0.025,-0.861,-0.276"
+      ],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": ""
+    },
+    {
+      "i": 3,
+      "y": 288,
+      "pct": 80,
+      "settled": true,
+      "contrast": [],
+      "cues": [
+        {
+          "t": "",
+          "o": 0.26
+        }
+      ],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 75.69% 0px 0px)"
+      ],
+      "act": "flow",
+      "stages": [],
+      "segs": [],
+      "custom": [
+        "0.056,0.000,0.004,-1.049,-0.321"
+      ],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": ""
+    },
+    {
+      "i": 4,
+      "y": 346,
+      "pct": 96,
+      "settled": true,
+      "contrast": [],
+      "cues": [
+        {
+          "t": "",
+          "o": 0.88
+        }
+      ],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 52.81% 0px 0px)"
+      ],
+      "act": "flow",
+      "stages": [],
+      "segs": [],
+      "custom": [
+        "0.121,0.000,0.024,-1.050,-0.359"
+      ],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": ""
+    },
+    {
+      "i": 5,
+      "y": 359,
+      "pct": 100,
+      "settled": true,
+      "contrast": [],
+      "cues": [
+        {
+          "t": "",
+          "o": 1
+        }
+      ],
+      "clips": [],
+      "rails": [],
+      "wipes": [
+        "inset(0px 36.38% 0px 0px)"
+      ],
+      "act": "flow",
+      "stages": [],
+      "segs": [],
+      "custom": [
+        "0.177,0.000,0.034,-0.961,-0.385"
+      ],
+      "customHold": false,
+      "seg": null,
+      "segp": null,
+      "bg": ""
+    }
+  ],
+  "consoleErrors": [],
+  "failed": []
+}

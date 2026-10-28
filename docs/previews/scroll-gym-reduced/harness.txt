@@ -1,0 +1,16 @@
+page: 2.0 viewport-heights, acts: flow > flow > flow > flow > flow
+  00.png  settled=true  cues=0  clips=
+  01.png  settled=true  cues=0  clips=
+  02.png  settled=true  cues=0  clips=
+  03.png  settled=true  cues=1  clips=
+  04.png  settled=true  cues=1  clips=
+  05.png  settled=true  cues=1  clips=
+  06.png  settled=true  cues=1  clips=
+  07.png  settled=true  cues=1  clips=
+  08.png  settled=true  cues=1  clips=
+  09.png  settled=true  cues=1  clips=
+
+no dead scroll detected
+contact sheet: /home/runner/work/sfm/sfm/docs/previews/scroll-gym-reduced/sheet.png
+
+shots + report.json in /home/runner/work/sfm/sfm/docs/previews/scroll-gym-reduced

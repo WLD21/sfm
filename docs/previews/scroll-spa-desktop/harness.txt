@@ -1,0 +1,8 @@
+page: 1.2 viewport-heights, acts: flow > flow > flow > flow > flow
+  00.png  settled=true  cues=1  clips=
+  01.png  settled=true  cues=1  clips=
+
+no dead scroll detected
+contact sheet: /home/runner/work/sfm/sfm/docs/previews/scroll-spa-desktop/sheet.png
+
+shots + report.json in /home/runner/work/sfm/sfm/docs/previews/scroll-spa-desktop
