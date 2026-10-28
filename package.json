@@ -13,19 +13,22 @@
     "preview": "vite preview --host 0.0.0.0",
     "test": "node --test tests/*.test.js",
     "test:browser": "playwright test",
-    "test:standalone": "node scripts/test-standalone.mjs"
+    "test:standalone": "node scripts/test-standalone.mjs",
+    "capture:scenes": "node scripts/capture-scenes.mjs",
+    "verify:scrollcraft": "node scripts/verify-scrollcraft.mjs"
   },
   "dependencies": {
-    "@fontsource/lora": "5.3.0",
     "@fontsource/manrope": "5.3.0",
     "@fontsource/outfit": "5.3.0",
     "gsap": "3.15.0",
     "react": "19.3.0",
-    "react-dom": "19.3.0"
+    "react-dom": "19.3.0",
+    "three": "0.186.0"
   },
   "devDependencies": {
     "@playwright/test": "1.64.1",
     "esbuild": "0.28.2",
-    "vite": "8.3.4"
+    "vite": "8.3.4",
+    "pngjs": "7.0.0"
   }
 }

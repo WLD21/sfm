@@ -5,7 +5,7 @@ import { readFile } from 'node:fs/promises';
 const repository = process.env.GITHUB_REPOSITORY;
 const branch = process.env.GITHUB_REF_NAME;
 const expected = process.env.GITHUB_SHA;
-if (repository !== 'WLD21/sfm' || branch !== 'codex/gym-spa-experience-2026-10-27') throw new Error('Unexpected build destination.');
+if (repository !== 'WLD21/sfm' || branch !== 'codex/scroll-craft-3d-2026-10-28') throw new Error('Unexpected build destination.');
 const token = process.env.GITHUB_TOKEN;
 if (!token) throw new Error('Missing scoped build token.');
 async function api(route, method = 'GET', body) {
@@ -22,13 +22,13 @@ if (ref.object.sha !== expected) {
   console.log('A newer source change exists; generated output will remain in the workflow artifact.');
   process.exit(0);
 }
-const output = execFileSync('git', ['-c', 'status.renames=false', 'status', '--porcelain=v1', '-z', '--untracked-files=all', '--', 'dist', 'OPEN-WEBSITE.html', 'package-lock.json', 'docs/previews'], { encoding: 'utf8' });
+const output = execFileSync('git', ['-c', 'status.renames=false', 'status', '--porcelain=v1', '-z', '--untracked-files=all', '--', 'dist', 'OPEN-WEBSITE.html', 'package-lock.json', 'docs/previews', 'public/images/scene-gym-desktop.png', 'public/images/scene-gym-mobile.png', 'public/images/scene-spa-desktop.png', 'public/images/scene-spa-mobile.png'], { encoding: 'utf8' });
 const entries = output.split('\0').filter(Boolean);
 if (!entries.length) { console.log('Generated output is already current.'); process.exit(0); }
 const tree = [];
 for (const entry of entries) {
   const path = entry.slice(3);
-  if (!(path.startsWith('dist/') || /^docs\/previews\/(gym|spa)-(mobile|desktop)\.png$/.test(path) || path === 'OPEN-WEBSITE.html' || path === 'package-lock.json') || path.includes('..')) throw new Error('Unexpected output path.');
+  if (!(path.startsWith('dist/') || (/^docs\/previews\/(gym|spa)-(mobile|desktop)\.png$/.test(path) || /^docs\/previews\/scene-posters\.json$/.test(path) || /^docs\/previews\/scroll-summary\.json$/.test(path) || /^docs\/previews\/scroll-(gym|spa)-(desktop|mobile|reduced)\/(?:[0-9]{2}\.png|sheet\.png|report\.json|harness\.txt)$/.test(path) || /^public\/images\/scene-(gym|spa)-(desktop|mobile)\.png$/.test(path)) || path === 'OPEN-WEBSITE.html' || path === 'package-lock.json') || path.includes('..')) throw new Error('Unexpected output path.');
   if (entry.slice(0, 2).includes('D')) tree.push({ path, mode: '100644', type: 'blob', sha: null });
   else {
     const blob = await api('/git/blobs', 'POST', { content: (await readFile(path)).toString('base64'), encoding: 'base64' });
@@ -37,7 +37,7 @@ for (const entry of entries) {
 }
 const parent = await api('/git/commits/' + expected);
 const nextTree = await api('/git/trees', 'POST', { base_tree: parent.tree.sha, tree });
-const commit = await api('/git/commits', 'POST', { message: 'Save verified gym and spa build and resolved dependency lock', tree: nextTree.sha, parents: [expected] });
+const commit = await api('/git/commits', 'POST', { message: 'Save verified Scroll Craft 3D build, exact scene posters and dependency lock', tree: nextTree.sha, parents: [expected] });
 const latest = await api('/git/ref/heads/' + branch);
 if (latest.object.sha !== expected) throw new Error('Source changed while preparing the build; refusing to overwrite.');
 await api('/git/refs/heads/' + branch, 'PATCH', { sha: commit.sha, force: false });

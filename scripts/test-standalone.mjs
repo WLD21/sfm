@@ -7,6 +7,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const input = process.argv[2] ? path.resolve(process.argv[2]) : path.join(root, 'OPEN-WEBSITE.html');
 const html = await readFile(input, 'utf8');
 const browser = await chromium.launch({
+  args: ['--use-angle=swiftshader', '--enable-unsafe-swiftshader'],
   ...(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {}),
 });
 
@@ -14,6 +15,12 @@ try {
   // The cloud browser disallows file: navigation. Render the exact document in
   // an offline, originless page instead: no dev server, HTTP assets or modules.
   const context = await browser.newContext({ offline: true, reducedMotion: 'reduce' });
+  await context.addInitScript(() => {
+    Element.prototype.requestPointerLock = () => Promise.reject(new Error('Native pointer lock disabled in verification'));
+    Element.prototype.setPointerCapture = function () {};
+    Element.prototype.releasePointerCapture = function () {};
+    Document.prototype.exitPointerLock = function () {};
+  });
   const page = await context.newPage();
   const errors = [];
   const networkRequests = [];
@@ -33,11 +40,11 @@ try {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.locator('[data-experience-choice="spa"]').click();
   await expect(page.locator('body')).toHaveAttribute('data-experience', 'spa');
-  await expect(page.locator('#home-title')).toHaveCSS('font-family', /Lora/);
+  await expect(page.locator('#home-title')).toHaveCSS('font-family', /Outfit/);
   await expect(page.locator('#home-title')).toHaveCSS('font-weight', '700');
   await expect(page.locator('body')).toHaveCSS('color', 'rgb(52, 45, 37)');
   await expect(page.locator('#home-title em')).toHaveCSS('color', 'rgb(121, 84, 33)');
-  expect(await page.evaluate(() => document.fonts.check('700 48px "Lora"'))).toBe(true);
+  expect(await page.evaluate(() => document.fonts.check('700 48px "Outfit"'))).toBe(true);
   await expect(page.locator('[data-spa-content] .hero-actions .button')).toHaveCSS('font-family', /Outfit/);
   expect(await page.evaluate(() => document.fonts.check('600 15px "Outfit"'))).toBe(true);
   await expect(page.locator('script[src], link[rel="stylesheet"]')).toHaveCount(0);
@@ -164,6 +171,12 @@ try {
     reducedMotion: 'no-preference',
     viewport: { width: 1100, height: 720 },
   });
+  await animated.addInitScript(() => {
+    Element.prototype.requestPointerLock = () => Promise.reject(new Error('Native pointer lock disabled in verification'));
+    Element.prototype.setPointerCapture = function () {};
+    Element.prototype.releasePointerCapture = function () {};
+    Document.prototype.exitPointerLock = function () {};
+  });
   const introPage = await animated.newPage();
   introPage.on('pageerror', (error) => errors.push(error.message));
   introPage.on('request', (request) => {
@@ -173,6 +186,12 @@ try {
   await expect(introPage.locator('#intro-dialog')).toBeVisible();
   await expect(introPage.locator('#intro-dialog')).not.toBeVisible({ timeout: 3000 });
   await expect(introPage.locator('#gym-home-title')).toBeVisible();
+  await introPage.locator('.gym-art').scrollIntoViewIfNeeded();
+  await expect(introPage.locator('[data-scene="gym"]')).toHaveAttribute('data-scene-ready', 'true', { timeout: 30000 });
+  await introPage.locator('[data-training-focus="confidence"]').click();
+  await introPage.locator('.gym-main-cta').click();
+  await expect(introPage.locator('#training-goal')).toHaveValue('confidence');
+  await introPage.keyboard.press('Escape');
 
   // The direct-open download must contain ScrollTrigger as well as the intro.
   await introPage.locator('#primary-nav [data-view="showcase"]').click();

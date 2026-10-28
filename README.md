@@ -123,3 +123,8 @@ There are no credentials in the project. Personal details are not sent to a serv
 The rebuild and local tests do not establish a deployment. The existing Sites project is `appgprj_6ad270cdc964819194480bb559a38ade`. No source version, successful publication or live URL has been created by this cloud task because Sites upload/deploy tools are unavailable here. Keep the existing project; publish using the supported Sites workflow when access is restored.
 
 For Vercel, the included `vercel.json` selects Vite, `npm ci`, `npm run build` and the `dist` output directory. `.vercelignore` excludes caches, local credentials and the standalone download from source upload. Run `npx --yes vercel@64.5.0 login`, then `npx --yes vercel@64.5.0 --prod` from this folder. See `DEPLOY-TO-VERCEL.txt` for project selection instructions. Vercel prints the live URL only after a successful deployment. This cloud session could not create one: its network proxy blocks Vercel's API and no Vercel account is connected; the CLI's temporary-deployment fallback was also unavailable.
+
+
+## Scroll Craft 3D update
+
+The complete downloaded Scroll Craft skill is in `tools/scroll-craft/`. The current design adds real 3D gym and recovery scenes, a training-focus selector, exact static fallbacks and a compact scroll experience. See [the implementation and verification notes](docs/SCROLL-CRAFT.md). `OPEN-WEBSITE.html` remains the self-contained offline version; `npm install` then `npm run dev` starts the complete editable project.

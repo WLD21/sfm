@@ -1,6 +1,4 @@
 import { t, setupLanguage } from './i18n.js';
-import '@fontsource/lora/latin-700.css';
-import '@fontsource/lora/latin-700-italic.css';
 import '@fontsource/outfit/latin-600.css';
 import '@fontsource/outfit/latin-700.css';
 import '@fontsource/manrope/latin-400.css';

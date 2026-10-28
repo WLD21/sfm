@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from './safe-test.js';
 import { readFile } from 'node:fs/promises';
 
 test.beforeEach(async ({ page }) => {
@@ -52,39 +52,6 @@ test('the whole site fades when switching, restores visible surfaces and remembe
   await expect(page.locator('#home-title')).toBeVisible();
 });
 
-test('dumbbells move, pausing stops motion and reduced-motion switching stays immediate', async ({ page }) => {
-  await page.emulateMedia({ reducedMotion: 'no-preference' });
-  await page.goto('/?lang=en');
-  const weight = page.locator('.weight-primary');
-  // Scroll the stationary container; the dumbbell itself is continuously moving.
-  await page.locator('.gym-art').scrollIntoViewIfNeeded();
-  await expect.poll(() => weight.evaluate(node => node.getAttribute('transform'))).not.toBeNull();
-  const before = await weight.getAttribute('transform');
-  await expect.poll(() => weight.getAttribute('transform')).not.toBe(before);
-  await page.getByRole('button', { name: 'Pause motion', exact: true }).click();
-  await expect(page.locator('body')).toHaveAttribute('data-motion', 'paused');
-  await expect.poll(() => weight.evaluate(node => {
-    const transform = getComputedStyle(node).transform;
-    return transform === 'none' || new DOMMatrixReadOnly(transform).isIdentity;
-  })).toBe(true);
-  // GSAP can restore an identity matrix instead of removing the SVG attribute.
-  // Verify the rendered state stays still over several animation frames.
-  expect(await weight.evaluate(node => new Promise(resolve => {
-    const resting = node.getAttribute('transform');
-    let frames = 0;
-    const check = () => {
-      if (node.getAttribute('transform') !== resting) return resolve(false);
-      if (++frames === 12) return resolve(true);
-      requestAnimationFrame(check);
-    };
-    requestAnimationFrame(check);
-  }))).toBe(true);
-  await page.emulateMedia({ reducedMotion: 'reduce' });
-  await page.locator('[data-experience-choice="spa"]').click();
-  await expect(page.locator('.site-main')).toHaveCSS('opacity', '1');
-  await expect(page.locator('.spa-scene')).toBeVisible();
-  await expect(page.locator('.motion-control')).toHaveCount(0);
-});
 
 test('a failed GSAP request leaves the switch and both scenes usable', async ({ page }) => {
   await page.route(/gsap/i, route => route.abort());

@@ -40,6 +40,14 @@ for (const photo of siteConfig.photos) {
   html = html.replaceAll(photo.src, embedded);
   javascript = javascript.replaceAll(photo.src, embedded);
 }
+for (const scene of ['gym', 'spa']) {
+  for (const size of ['mobile', 'desktop']) {
+    const asset = '/images/scene-' + scene + '-' + size + '.png';
+    const bytes = await readFile(path.join(root, 'public', asset.slice(1)));
+    if (!javascript.includes(asset)) throw new Error('Missing 3D poster reference: ' + asset);
+    javascript = javascript.replaceAll(asset, 'data:image/png;base64,' + bytes.toString('base64'));
+  }
+}
 const icon = await readFile(path.join(root, 'public/favicon.svg'));
 html = html.replace('href="/favicon.svg"', `href="data:image/svg+xml;base64,${icon.toString('base64')}"`);
 html = html.replace(/\s*<script\s+type="module"\s+src="\/src\/main\.js"><\/script>/, '');
@@ -58,4 +66,4 @@ new Script(embeddedScript, { filename: 'OPEN-WEBSITE.html (embedded script)' });
 await mkdir(path.dirname(destination), { recursive: true });
 await writeFile(destination, html);
 console.log(`Standalone HTML: ${destination} (${Buffer.byteLength(html).toLocaleString()} bytes)`);
-console.log('Embedded: all CSS, classic JavaScript including GSAP, local font files, favicon and six original photos.');
+console.log('Embedded: all CSS, classic JavaScript including React, Three.js, GSAP and Scroll Craft, local fonts, favicon, six original photos and four exact 3D posters.');

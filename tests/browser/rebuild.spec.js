@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from './safe-test.js';
 
 // Retain the existing massage regression suite in its original spa context.
 // dual-experience.spec.js separately verifies the new default training journey.

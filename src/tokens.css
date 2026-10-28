@@ -15,7 +15,7 @@
   --ivory: var(--paper);
   --ink: #342d25;
   --line: var(--border);
-  --display: 'Lora', Georgia, 'Times New Roman', serif;
+  --display: 'Outfit', 'Manrope', Arial, Helvetica, sans-serif;
   --cta: 'Outfit', 'Manrope', Arial, Helvetica, sans-serif;
   --serif: var(--display);
   --sans: 'Manrope', Arial, Helvetica, sans-serif;

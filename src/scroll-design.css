@@ -1,0 +1,100 @@
+/* Compact movement studio. Scroll Craft owns decorative motion only. */
+:root { --display:'Outfit','Manrope',Arial,sans-serif; }
+body[data-experience='gym']::before { background:none; }
+.gym-hero { padding:12px 0 23px; grid-template-columns:1.04fr 1fr; gap:44px; }
+.gym-hero h1 { font-size:clamp(52px,5.7vw,82px); line-height:.99; letter-spacing:-.055em; }
+.gym-hero h1 em { font-style:normal; font-weight:600; color:#607746; font-size:.91em; letter-spacing:-.055em; }
+.gym-hero .eyebrow { margin-bottom:21px; font-size:10px; max-width:44ch; }
+.gym-description { font-size:15px; line-height:1.75; max-width:42ch; margin-top:19px; }
+.gym-art { height:510px; border-radius:140px 20px 20px 20px; background:#e6ead8; border-color:#d3dac3; }
+.gym-art::before { width:400px; height:400px; top:-150px; right:-90px; background:#f6f6e8; }
+.gym-art .scene-topline { left:38px; top:31px; }
+.gym-art .scene-caption { bottom:29px; left:32px; z-index:3; }
+.scene-caption strong { font:600 27px/1.2 var(--cta); letter-spacing:-.7px; }
+.scene-caption > span { color:#435939; }
+.scene-arc { position:absolute; width:390px; height:390px; border:1px solid #76896530; border-radius:50%; top:94px; left:90px; z-index:0; pointer-events:none; }
+.scene-3d { position:relative; width:100%; height:100%; overflow:hidden; isolation:isolate; }
+.gym-art .gym-scene { position:absolute; inset:0; width:100%; height:100%; z-index:1; }
+.scene-canvas { display:block; position:absolute; width:100%; height:100%; inset:0; z-index:2; }
+.scene-poster { position:absolute; inset:0; z-index:1; }
+.scene-poster picture,.scene-poster img { position:absolute; inset:0; width:100%; height:100%; display:block; object-fit:fill; }
+.scene-poster .experience-scene { position:absolute; inset:0; width:100%; height:100%; }
+.scene-3d[data-scene-ready='true'] .scene-poster { visibility:hidden; }
+.training-focus { margin-top:24px; max-width:430px; }
+.training-focus > p:first-child { color:var(--ink); font:600 12px/1.5 var(--sans); }
+.focus-options { display:flex; gap:7px; margin-top:10px; }
+.focus-options button { flex:1; display:flex; align-items:center; justify-content:space-between; min-height:44px; gap:7px; padding:10px 13px; border:1px solid #bbc9a8; border-radius:8px; color:#354b2d; background:transparent; font:500 13px/1.3 var(--cta); }
+.focus-options button[aria-pressed='true'] { background:#d9e7be; border-color:#5b7840; }
+.focus-options button > span { font-size:17px; opacity:.5; }
+.focus-options button[aria-pressed='true'] > span { opacity:1; }
+.focus-description { font-size:11px; line-height:1.6; color:#4e6044; margin-top:9px; min-height:18px; }
+.gym-hero .hero-actions { margin-top:18px; }
+.gym-note { margin-top:15px; }
+.gym-pillars { margin-top:0; gap:16px; padding:18px 0; }
+.gym-pillars > div:first-child { padding-left:0; }
+.recovery-story { display:grid; grid-template-columns:170px 1fr; gap:25px; align-items:center; padding:20px 0; border-bottom:1px solid var(--border); }
+.recovery-photo-link { display:block; border-radius:12px; overflow:hidden; }
+.recovery-story img { display:block; width:100%; height:108px; object-fit:cover; }
+.recovery-story .eyebrow { font-size:9px; margin-bottom:8px; }
+.recovery-story-title { font:500 22px/1.2 var(--cta); letter-spacing:-.5px; }
+.recovery-story .text-link { margin-top:10px; font-size:11px; }
+.experience-bridge { padding:15px 0 0; }
+.experience-bridge p { font-style:normal; font-weight:500; }
+.training-programs { display:block; border-top:1px solid var(--border); margin-top:28px; }
+.training-program { display:grid; grid-template-columns:.7fr 1.1fr 1.4fr auto; align-items:center; gap:20px; padding:25px 0; border:0; border-bottom:1px solid var(--border); background:none; border-radius:0; box-shadow:none; }
+.training-program .eyebrow,.training-program h2,.training-program > p,.training-program .text-link { margin:0; }
+.training-program h2 { font:600 26px/1.2 var(--cta); letter-spacing:-.7px; }
+.training-program .text-link { border:0; padding:10px 0; }
+.training-program .eyebrow { font-size:9px; line-height:1.8; }
+#spa-atmosphere { width:310px; right:-18px; bottom:28px; }
+.spa-atmosphere-card { padding:0 0 11px; background:#f4ead4; border-radius:26px; overflow:hidden; box-shadow:0 12px 28px #4d361c16; }
+.spa-atmosphere-card .spa-scene { height:234px; }
+.spa-atmosphere-card p { font-size:10px; color:#644b29; }
+body[data-experience='spa'] .hero-title em,body[data-experience='spa'] h1 em { font-style:normal; }
+@media (max-width:1000px) {
+  .gym-hero { gap:25px; }
+  .gym-art { height:470px; }
+  .training-program { grid-template-columns:1fr 1.2fr; gap:12px 28px; }
+  .training-program .eyebrow { grid-column:1; }
+  .training-program h2 { grid-column:1; }
+  .training-program > p:not(.eyebrow) { grid-column:2; grid-row:1 / 3; }
+  .training-program .text-link { grid-column:2; }
+}
+@media (max-width:640px) {
+  .gym-hero { grid-template-columns:1fr; gap:22px; padding:6px 0 20px; }
+  .gym-hero h1 { font-size:clamp(45px,12.4vw,68px); line-height:1.01; }
+  .gym-hero h1 em { font-size:.92em; }
+  .gym-hero .eyebrow { font-size:8px; letter-spacing:1px; margin-bottom:17px; }
+  .gym-description { font-size:13px; line-height:1.75; margin-top:15px; }
+  .training-focus { margin-top:17px; }
+  .training-focus > p:first-child { font-size:11px; }
+  .focus-options button { padding:10px; font-size:12px; gap:4px; }
+  .focus-description { font-size:11px; }
+  .gym-note { font-size:10px; margin-top:10px; }
+  .gym-art { height:300px; border-radius:70px 18px 18px 18px; }
+  .gym-art .scene-topline { top:22px; left:25px; font-size:8px; }
+  .gym-art .scene-caption { left:24px; bottom:20px; }
+  .scene-caption strong { font-size:23px; }
+  .scene-arc { width:270px; height:270px; top:35px; left:60px; }
+  .gym-pillars { padding:17px 0; gap:0; }
+  .gym-pillars strong { font-size:12px; }
+  .gym-pillars p > span { font-size:10px; }
+  .recovery-story { grid-template-columns:100px 1fr; gap:17px; padding:18px 0; }
+  .recovery-story img { height:109px; }
+  .recovery-story-title { font-size:18px; }
+  .recovery-story .text-link { font-size:10px; }
+  .experience-bridge p { font-size:12px; }
+  #spa-atmosphere { width:215px; right:-6px; bottom:24px; }
+  .spa-atmosphere-card { border-radius:18px; }
+  .spa-atmosphere-card .spa-scene { height:160px; }
+  .spa-atmosphere-card p { font-size:8px; padding:0 7px; }
+  .training-program { display:block; padding:22px 0; border-radius:0; }
+  .training-program .eyebrow { margin-bottom:8px; }
+  .training-program h2 { font-size:26px; margin-bottom:11px; }
+  .training-program .text-link { margin-top:10px; }
+}
+@media (prefers-reduced-motion:reduce) {
+  [data-sc-in],[data-sc-reveal],[data-sc-parallax] { opacity:1!important; transform:none!important; clip-path:none!important; }
+}
+body[data-motion='paused'] [data-sc-in],
+body[data-motion='paused'] [data-sc-reveal] { opacity:1!important; clip-path:none!important; }
