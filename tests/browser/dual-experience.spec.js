@@ -44,13 +44,15 @@ test('the whole site fades when switching, restores visible surfaces and remembe
   await page.goto('/?lang=en');
   await page.evaluate(() => {
     window.__fadeSamples = [];
-    const header = document.querySelector('.site-header');
-    const until = performance.now() + 1400;
-    const sample = () => {
-      window.__fadeSamples.push(Number(getComputedStyle(header).opacity));
-      if (performance.now() < until) requestAnimationFrame(sample);
-    };
-    requestAnimationFrame(sample);
+    document.querySelector('[data-experience-choice="spa"]').addEventListener('click', () => {
+      const header = document.querySelector('.site-header');
+      const until = performance.now() + 1400;
+      const sample = () => {
+        window.__fadeSamples.push(Number(getComputedStyle(header).opacity));
+        if (performance.now() < until) requestAnimationFrame(sample);
+      };
+      requestAnimationFrame(sample);
+    }, { once: true, capture: true });
   });
   await page.locator('[data-experience-choice="spa"]').click();
   await expect.poll(() => page.evaluate(() => Math.min(...window.__fadeSamples))).toBeLessThan(.96);

@@ -29,6 +29,7 @@ jobs:
       - name: Run the unmodified upstream preflight
         run: |
           node scripts/verify-skill-source.mjs
+          node tools/scroll-craft/scripts/workspace.mjs --ensure
           node tools/scroll-craft/scripts/doctor.mjs
       - name: Capture exact fallbacks from the final 3D scenes
         run: npm run capture:scenes
