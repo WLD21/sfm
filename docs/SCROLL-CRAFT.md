@@ -39,3 +39,5 @@ Automated browser tests cover real pixel change, pause, scroll, context loss, no
 Training and massage forms prepare private enquiries for the visitor to share with Supreme. They do not send, reserve or charge. Subscription plans and a live booking/payment provider have not been supplied; this update does not fabricate them. The code change is separate from restoring the unavailable Sites/Vercel publication.
 
 CI runs the browser suite in one worker because the runner's software WebGL renderer otherwise competes with another page's short intro timer. Intro behavior is tested separately; scroll sheets use the explicit `intro=skip` query to inspect the page beneath it.
+
+On phones the order is headline, 3D scene, training focus and enquiry. The fixed phone action remains available. The assembly uses available document travel, so it returns to its assembled state at the end even on a tall desktop viewport.

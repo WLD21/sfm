@@ -41,6 +41,8 @@ test('scroll progress moves rendered weights and pause holds actual GPU frames',
   const initial = Number((await scene.getAttribute('data-sc-verify-state')).split(',')[3]);
   await page.evaluate(() => scrollTo({ top: 180, behavior: 'instant' }));
   await expect.poll(async () => Math.abs(Number((await scene.getAttribute('data-sc-verify-state')).split(',')[3]) - initial)).toBeGreaterThan(.05);
+  await page.evaluate(() => scrollTo({ top: document.documentElement.scrollHeight, behavior: 'instant' }));
+  await expect.poll(async () => Math.abs(Number((await scene.getAttribute('data-sc-verify-state')).split(',')[3]) + .77)).toBeLessThan(.015);
   await page.evaluate(() => document.querySelector('.motion-control').click());
   await expect(page.locator('body')).toHaveAttribute('data-motion', 'paused');
   const frames = await scene.getAttribute('data-scene-frames');

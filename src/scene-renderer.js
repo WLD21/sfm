@@ -13,7 +13,7 @@ function canvasTexture(draw, size = 256) {
 }
 function woodTexture() {
   return canvasTexture((c, n) => {
-    c.fillStyle = '#c99b63'; c.fillRect(0, 0, n, n);
+    c.fillStyle = '#ae805b'; c.fillRect(0, 0, n, n);
     for (let i = 0; i < 170; i++) {
       const x = (i * 71.37) % n;
       c.strokeStyle = i % 3 ? 'rgba(82,45,20,.12)' : 'rgba(255,235,193,.25)';
@@ -89,13 +89,13 @@ function gymWorld(scene) {
   const plinth = mesh(new THREE.CylinderGeometry(2.05, 2.1, .16, 96), plinthMaterial, scene, 0, -.96, 0);
   plinth.scale.z = .72;
   return {
-    update({ time, progress, pointer, focus, motion }) {
+    update({ time, progress, pointer, focus, motion, delta }) {
       const f = focus === 'fitness' ? 1 : focus === 'confidence' ? 2 : 0;
       const open = Math.sin(progress * Math.PI) * .3;
       front.ends.forEach(({ item, side }) => { item.position.x = side * (.77 + open); });
       rear.ends.forEach(({ item, side }) => { item.position.x = side * (.77 + open * .6); });
-      group.rotation.y = smooth(group.rotation.y, f * .19 + pointer.x * .13 + progress * .28, motion ? .075 : 1);
-      group.rotation.x = smooth(group.rotation.x, pointer.y * .06, motion ? .07 : 1);
+      group.rotation.y = smooth(group.rotation.y, f * .19 + pointer.x * .13 + progress * .28, motion ? 1 - Math.exp(-delta * 12) : 1);
+      group.rotation.x = smooth(group.rotation.x, pointer.y * .06, motion ? 1 - Math.exp(-delta * 12) : 1);
       front.root.position.y = -.06 + (motion ? Math.sin(time * .65) * .035 : 0) + progress * .08;
       front.root.rotation.z = -.2 + progress * .16;
       rear.root.position.y = .69 + (motion ? Math.sin(time * .55 + 1) * .045 : 0) - f * .075;
@@ -129,11 +129,11 @@ function palm(parent, wood, leafMaterial, x, y, z, scale = 1) {
 }
 function spaWorld(scene) {
   const group = new THREE.Group(); scene.add(group);
-  const wood = new THREE.MeshStandardMaterial({ map: woodTexture(), color: '#f5d4a1', roughness: .83 });
+  const wood = new THREE.MeshStandardMaterial({ map: woodTexture(), color: '#e6c6a5', roughness: .83 });
   const darkWood = new THREE.MeshStandardMaterial({ color: '#71472c', roughness: .79 });
   const steel = new THREE.MeshStandardMaterial({ color: '#343632', roughness: .4, metalness: .8 });
   const stone = new THREE.MeshStandardMaterial({ color: '#55564d', roughness: .97 });
-  const leaf = new THREE.MeshStandardMaterial({ color: '#3c6545', roughness: .8, side: THREE.DoubleSide });
+  const leaf = new THREE.MeshStandardMaterial({ color: '#264c32', roughness: .8, side: THREE.DoubleSide });
   const stoneBase = new THREE.MeshStandardMaterial({ color: '#d7c9ab', roughness: .95 });
   box(group, stoneBase, 3.5, .13, 2.55, 0, -.9, -.18);
   // An open architectural detail: cedar walls, bench and heater, not a toy hut.
@@ -148,7 +148,7 @@ function spaWorld(scene) {
     box(group, darkWood, .085, .72, .085, x, -.49, -.36);
   }
   for (let i = 0; i < 3; i++) box(group, wood, 2.1, .11, .045, -.28, .23 + i * .15, -1.1);
-  const heater = new THREE.Group(); heater.position.set(1.08, -.52, -.42); group.add(heater);
+  const heater = new THREE.Group(); heater.position.set(.83, -.52, -.19); group.add(heater);
   const heaterBody = mesh(new THREE.CylinderGeometry(.29, .25, .64, 32), steel, heater);
   for (let i = 0; i < 15; i++) {
     const a = i / 15 * Math.PI * 2;
@@ -174,14 +174,14 @@ function spaWorld(scene) {
     group.add(sprite); steam.push(sprite);
   }
   return {
-    update({ time, progress, pointer, motion }) {
-      group.rotation.y = smooth(group.rotation.y, -.12 + pointer.x * .09 + progress * .13, motion ? .065 : 1);
+    update({ time, progress, pointer, motion, delta }) {
+      group.rotation.y = smooth(group.rotation.y, -.12 + pointer.x * .09 + progress * .13, motion ? 1 - Math.exp(-delta * 12) : 1);
       crown.rotation.z = motion ? Math.sin(time * .5) * .045 : 0;
       steam.forEach((p, i) => {
         const life = ((motion ? time * .12 : .24) + i / steam.length) % 1;
-        p.position.set(1.03 + Math.sin(life * 4 + i) * .12, -.05 + life * 1.65, -.4 + life * .15);
+        p.position.set(.83 + Math.sin(life * 4 + i) * .12, -.05 + life * 1.65, -.19 + life * .15);
         p.scale.setScalar(.28 + life * .7);
-        p.material.opacity = Math.sin(life * Math.PI) * .56;
+        p.material.opacity = Math.sin(life * Math.PI) * .7;
       });
       return [group.rotation.y, crown.rotation.z, steam[0].position.y, steam[0].material.opacity, heaterBody.position.y];
     },
@@ -212,9 +212,9 @@ export function createScene(host, kind, onFail) {
   });
   const env = new THREE.CubeTexture(faces); env.colorSpace = THREE.SRGBColorSpace;
   env.needsUpdate = true; scene.environment = env;
-  scene.add(new THREE.HemisphereLight('#fffde9', '#5c6451', 2.3));
-  const light = new THREE.DirectionalLight('#fff5db', 4.2); light.position.set(-3, 6, 4); scene.add(light);
-  const fill = new THREE.DirectionalLight('#e0ead4', 1.8); fill.position.set(4, 1, -2); scene.add(fill);
+  scene.add(new THREE.HemisphereLight('#fffde9', '#5c6451', kind === 'spa' ? 1.35 : 2.3));
+  const light = new THREE.DirectionalLight('#fff5db', kind === 'spa' ? 2.4 : 4.2); light.position.set(-3, 6, 4); scene.add(light);
+  const fill = new THREE.DirectionalLight('#e0ead4', kind === 'spa' ? .9 : 1.8); fill.position.set(4, 1, -2); scene.add(fill);
   const world = kind === 'gym' ? gymWorld(scene) : spaWorld(scene);
   const shadowTexture = canvasTexture((c, n) => {
     const g = c.createRadialGradient(n / 2, n / 2, n * .09, n / 2, n / 2, n * .48);
@@ -237,14 +237,16 @@ export function createScene(host, kind, onFail) {
     const engine = parseFloat(act.style.getPropertyValue('--sc-p'));
     const raw = Number.isFinite(engine) ? engine : (scrollY + innerHeight - top) / (h + innerHeight);
     const opening = (innerHeight - top) / (h + innerHeight);
-    return clamp((raw - opening) / (Math.max(220, h * .7) / (h + innerHeight)), 0, 1);
+    const available = Math.max(1, document.documentElement.scrollHeight - innerHeight);
+    const travel = Math.min(Math.max(220, h * .7), available);
+    return clamp((raw - opening) / (travel / (h + innerHeight)), 0, 1);
   }
   function render(now = performance.now()) {
     if (disposed) return;
     const dt = last ? Math.min((now - last) / 1000, .05) : 0; last = now;
     if (settings.motion) clock += dt;
-    progress = settings.motion ? smooth(progress, readProgress(), .1) : 0;
-    const state = world.update({ ...settings, time: clock, progress, pointer: settings.motion ? pointer : { x: 0, y: 0 } });
+    progress = settings.motion ? smooth(progress, readProgress(), 1 - Math.exp(-dt * 14)) : 0;
+    const state = world.update({ ...settings, time: clock, delta: dt, progress, pointer: settings.motion ? pointer : { x: 0, y: 0 } });
     const started = performance.now();
     renderer.render(scene, camera);
     const elapsed = performance.now() - started;
@@ -274,7 +276,7 @@ export function createScene(host, kind, onFail) {
     renderer.setPixelRatio(Math.min(devicePixelRatio || 1, resolutionLimit, coarse || innerWidth < 641 ? 1.25 : 1.5));
     renderer.setSize(w, h, false); camera.aspect = w / h;
     const narrow = w / h < 1.2;
-    camera.position.set(kind === 'spa' ? 3.8 : 3.3, kind === 'spa' ? 2.4 : 2.15, kind === 'spa' ? 5.6 : 6.1);
+    camera.position.set(kind === 'spa' ? 3.1 : 3.3, kind === 'spa' ? 1.9 : 2.15, kind === 'spa' ? 4.6 : 6.1);
     if (narrow) camera.position.multiplyScalar(kind === 'spa' ? 1.03 : 1.04);
     camera.lookAt(0, kind === 'spa' ? .15 : -.02, 0); camera.updateProjectionMatrix(); render();
   }

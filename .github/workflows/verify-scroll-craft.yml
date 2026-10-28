@@ -67,7 +67,7 @@ jobs:
               assert 'Supreme-Fitness-Massage/src/experience.jsx' in z.namelist()
               assert 'Supreme-Fitness-Massage/OPEN-WEBSITE.html' in z.namelist()
               required = [
-                  'package.json', 'package-lock.json', 'vite.config.js',
+                  'package.json', 'package-lock.json', 'vercel.json', 'playwright.config.js',
                   'src/scene-renderer.js', 'src/experience-scenes.jsx',
                   'src/scroll-experience.js', 'src/scroll-design.css',
                   'tools/scroll-craft/SKILL.md', 'tools/scroll-craft/LICENSE',

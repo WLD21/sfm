@@ -98,3 +98,19 @@ body[data-experience='spa'] .hero-title em,body[data-experience='spa'] h1 em { f
 }
 body[data-motion='paused'] [data-sc-in],
 body[data-motion='paused'] [data-sc-reveal] { opacity:1!important; clip-path:none!important; }
+
+/* Give the physical scene a place on the opening phone screen. */
+.gym-art .scene-topline { left:80px; }
+@media (max-width:640px) {
+  .gym-hero { gap:12px; }
+  .gym-hero-copy { display:contents; }
+  .gym-hero-copy > .eyebrow { order:0; margin-bottom:0; }
+  .gym-hero-copy > h1 { order:1; letter-spacing:-.045em; }
+  .gym-hero-copy > .gym-description { order:2; margin:0 0 2px; }
+  .gym-hero > .gym-art { order:3; height:260px; margin:4px auto; }
+  .gym-hero-copy > .training-focus { order:4; margin-top:8px; width:100%; max-width:none; }
+  .gym-hero-copy > .hero-actions { order:5; margin-top:1px; }
+  .gym-hero-copy > .gym-note { order:6; margin-top:0; }
+  .gym-art .scene-topline { left:27px; top:22px; }
+  .gym-art .scene-caption { bottom:18px; }
+}
