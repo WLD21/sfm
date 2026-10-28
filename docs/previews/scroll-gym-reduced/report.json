@@ -1,6 +1,6 @@
 {
   "doc": {
-    "height": 1690,
+    "height": 1642,
     "vh": 844,
     "acts": [
       "flow",
@@ -35,8 +35,8 @@
     },
     {
       "i": 1,
-      "y": 228,
-      "pct": 27,
+      "y": 180,
+      "pct": 23,
       "settled": true,
       "contrast": [],
       "cues": [],
@@ -56,8 +56,8 @@
     },
     {
       "i": 2,
-      "y": 321,
-      "pct": 38,
+      "y": 273,
+      "pct": 34,
       "settled": true,
       "contrast": [],
       "cues": [],
@@ -77,8 +77,8 @@
     },
     {
       "i": 3,
-      "y": 476,
-      "pct": 56,
+      "y": 428,
+      "pct": 54,
       "settled": true,
       "contrast": [],
       "cues": [
@@ -103,8 +103,8 @@
     },
     {
       "i": 4,
-      "y": 497,
-      "pct": 59,
+      "y": 465,
+      "pct": 58,
       "settled": true,
       "contrast": [],
       "cues": [
@@ -129,8 +129,8 @@
     },
     {
       "i": 5,
-      "y": 528,
-      "pct": 62,
+      "y": 480,
+      "pct": 60,
       "settled": true,
       "contrast": [],
       "cues": [
@@ -155,8 +155,8 @@
     },
     {
       "i": 6,
-      "y": 642,
-      "pct": 76,
+      "y": 594,
+      "pct": 74,
       "settled": true,
       "contrast": [],
       "cues": [
@@ -181,7 +181,7 @@
     },
     {
       "i": 7,
-      "y": 765,
+      "y": 717,
       "pct": 90,
       "settled": true,
       "contrast": [],
@@ -207,7 +207,7 @@
     },
     {
       "i": 8,
-      "y": 827,
+      "y": 779,
       "pct": 98,
       "settled": true,
       "contrast": [],
@@ -233,7 +233,7 @@
     },
     {
       "i": 9,
-      "y": 846,
+      "y": 798,
       "pct": 100,
       "settled": true,
       "contrast": [],
