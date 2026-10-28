@@ -41,3 +41,5 @@ Training and massage forms prepare private enquiries for the visitor to share wi
 CI runs the browser suite in one worker because the runner's software WebGL renderer otherwise competes with another page's short intro timer. Intro behavior is tested separately; scroll sheets use the explicit `intro=skip` query to inspect the page beneath it.
 
 On phones the order is headline, 3D scene, training focus and enquiry. The fixed phone action remains available. The assembly uses available document travel, so it returns to its assembled state at the end even on a tall desktop viewport.
+
+Poster capture hides surrounding HTML labels and fixed controls, so the fallback cannot duplicate live text. A ready WebGL canvas removes its poster from display completely; visibility inheritance cannot leave a second subject underneath the live model.

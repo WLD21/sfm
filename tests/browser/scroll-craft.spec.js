@@ -19,6 +19,7 @@ test('real 3D renders, focus changes visible pixels and every training CTA carri
   await page.goto('/?lang=en');
   const scene = page.locator('[data-scene="gym"]');
   await expect(scene).toHaveAttribute('data-scene-ready', 'true', { timeout: 30000 });
+  await expect(scene.locator('.scene-poster')).toBeHidden();
   const before = await scene.locator('canvas').screenshot();
   await page.locator('[data-training-focus="confidence"]').click();
   await expect(scene).toHaveAttribute('data-scene-focus', 'confidence');
@@ -79,6 +80,7 @@ test('WebGL unavailable and context loss retain exact posters and useful control
   });
   await page.goto('/?lang=en');
   await expect(page.locator('[data-scene="gym"]')).toHaveAttribute('data-scene-fallback', 'true', { timeout: 30000 });
+  await expect(page.locator('[data-scene="gym"] .scene-poster')).toBeVisible();
   const img = page.locator('[data-scene="gym"] .scene-poster img');
   await expect.poll(() => img.evaluate(el => el.complete && el.naturalWidth > 0)).toBe(true);
   await page.locator('[data-training-focus="fitness"]').click();

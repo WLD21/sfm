@@ -30,6 +30,10 @@ try {
       await expect(host).toHaveAttribute('data-scene-ready', 'true', { timeout: 30000 });
       await page.evaluate(() => document.querySelector('.motion-control').click());
       await expect(page.locator('body')).toHaveAttribute('data-motion', 'paused');
+      // A locator screenshot includes anything composited above the canvas.
+      // Hide HTML labels and fixed controls so the poster contains the scene
+      // alone; those accessible labels remain live HTML in every motion mode.
+      await page.addStyleTag({ content: '.scene-topline,.scene-caption,.scene-arc,.hero-caption,.hero-seal,.mobile-booking-bar,.spa-atmosphere-card > p { visibility:hidden!important; }' });
       const canvas = host.locator('canvas');
       const path = 'public/images/scene-' + mode + '-' + size + '.png';
       const bytes = await canvas.screenshot({ path });
